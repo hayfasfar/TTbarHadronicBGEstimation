@@ -44,8 +44,17 @@ if len(sys.argv) > 3:
 
 #params = '0x0'
 
+
 print('regionby', regionby)
+
+output_dir = 'output'
+
+# Check if the directory exists, if not, create it
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
+
 savedirname = 'output/ttbarfits_'+regionby+'_'+dname+params
+
 print 'saving to {0}'.format(savedirname)
 
 def _generate_constraints(nparams):
