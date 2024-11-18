@@ -45,7 +45,7 @@ if len(sys.argv) > 3:
 #params = '0x0'
 
 print('regionby', regionby)
-savedirname = 'ttbarfits_'+regionby+'_'+dname+params
+savedirname = 'output/ttbarfits_'+regionby+'_'+dname+params
 print 'saving to {0}'.format(savedirname)
 
 def _generate_constraints(nparams):
