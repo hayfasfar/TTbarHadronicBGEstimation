@@ -1,0 +1,179 @@
+{
+    "NAME": "ttbar",
+    "GLOBAL": {
+	"FILE": "TTbarAllHad$process.root",
+	"FILE_UP": "TTbarAllHad$process_$syst_up.root",
+	"FILE_DOWN": "TTbarAllHad$process_$syst_down.root",
+	"HIST": "MttvsMt$region",
+	"HIST_UP": "MttvsMt$region$systup",
+	"HIST_DOWN": "MttvsMt$region$systdown",
+	"path": "/eos/home-h/hrejebsf/2Dalphabet_files/files_loosetomedium_Sep24",
+	"SIGNAME": [
+	        "signalRSGluon1000","signalRSGluon1500","signalRSGluon2000",  "signalRSGluon2500", "signalRSGluon3000",  "signalRSGluon3500", "signalRSGluon4000",  "signalRSGluon4500",  "signalRSGluon5000",  "signalRSGluon5500", "signalRSGluon6000"
+        ]
+    },
+    "REGIONS": {
+        "fwd16Pass": {
+            "PROCESSES": ["16_SIGNAME","16_TTbar"],
+            "BINNING": "default"
+            },
+        "fwd16Fail": {
+                "PROCESSES": ["16_SIGNAME","16_TTbar"],
+                "BINNING": "default"
+            }
+    },
+    "PROCESSES": {
+        "data_obs": {
+                "SYSTEMATICS": [],
+                "SCALE": 1.0,
+                "COLOR": 1,
+                "TYPE": "DATA",
+                "TITLE": "Data",
+                "HELP": "since the data file is not called TTbarAllHaddata_obs.root, we make an alias to the real name - shown below",
+                "ALIAS": "16_Data",
+                "LOC": "path/FILE:HIST"
+            },
+        "16_SIGNAME": {
+                "SYSTEMATICS":["lumi_corr", "lumi16", "pileup", "prefiring", "pdf", "jes16", "jer16", "q2", "ttag_pt1_16", "ttag_pt2_16", "ttag_pt3_16"],
+                "SCALE": 1.0, 
+                "COLOR": 1, 
+                "TYPE": "SIGNAL",
+                "TITLE": "g_{RS} (2 TeV)",
+                "LOC": "path/FILE:HIST"
+            },
+            "16_TTbar": {
+                "SYSTEMATICS": ["lumi_corr", "lumi16", "ttbar_xsec", "prefiring", "pileup", "pdf", "q2", "jes16", "jer16", "ttag_pt1_16", "ttag_pt2_16", "ttag_pt3_16"],
+                "SCALE": 1,
+                "COLOR": 2,
+                "TYPE": "BKG",
+                "TITLE": "t#bar{t}",
+                "LOC": "path/FILE:HIST"
+            }
+        
+        },
+     "SYSTEMATICS": {
+        "lumi_corr": {
+            "CODE": 0,
+            "VAL": 1.006
+        },
+        "lumi16": {
+            "CODE": 0,
+            "VAL": 1.01
+        },
+        "ttbar_xsec": {
+            "CODE": 0,
+            "VAL": 2.0
+        },
+        "btag_unc": {
+            "CODE": 0,
+            "VAL": 1.0
+        },
+        "pileup": {
+	    "ALIAS": "PILEUP",
+            "CODE": 2,
+	    "UP": "path/FILE:HIST_UP",
+	    "DOWN": "path/FILE:HIST_DOWN",
+            "SCALE": 1.0,
+	    "SIGMA": 1.0
+        },
+        "pdf": {
+	    "ALIAS": "PDF",
+            "CODE": 2,
+	    "UP": "path/FILE:HIST_UP",
+	    "DOWN": "path/FILE:HIST_DOWN",
+            "SCALE": 1.0,
+	    "SIGMA": 1.0
+        },
+        "jes16": {
+	    "ALIAS": "JES",
+            "CODE": 2,
+	    "UP": "path/FILE:HIST_UP",
+	    "DOWN": "path/FILE:HIST_DOWN",
+            "SCALE": 1.0,
+	    "SIGMA": 1.0
+        },
+        "jer16": {
+	    "ALIAS": "JER",
+            "CODE": 2,
+	    "UP": "path/FILE:HIST_UP",
+	    "DOWN": "path/FILE:HIST_DOWN",
+            "SCALE": 1.0,
+	    "SIGMA": 1.0
+        },
+        "btag": {
+	    "ALIAS": "BTAG",
+            "CODE": 2,
+	    "UP": "path/FILE:HIST_UP",
+	    "DOWN": "path/FILE:HIST_DOWN",
+            "SCALE": 1.0,
+	    "SIGMA": 1.0
+        },
+        "q2": {
+	    "ALIAS": "Q2",
+            "CODE": 2,
+	    "UP": "path/FILE:HIST_UP",
+	    "DOWN": "path/FILE:HIST_DOWN",
+            "SCALE": 1.0,
+	    "SIGMA": 1.0
+        },
+        "prefiring": {
+	    "ALIAS": "PREFIRING",
+            "CODE": 2,
+	    "UP": "path/FILE:HIST_UP",
+	    "DOWN": "path/FILE:HIST_DOWN",
+            "SCALE": 1.0,
+	    "SIGMA": 1.0
+        },
+        "ttag_pt1_16": {
+            "ALIAS": "TTAG_PT1",
+            "CODE": 2,
+            "UP": "path/FILE:HIST_UP",
+            "DOWN": "path/FILE:HIST_DOWN",
+                "SCALE": 1.0,
+            "SIGMA": 5.0
+        },
+        "ttag_pt2_16": {
+            "ALIAS": "TTAG_PT2",
+            "CODE": 2,
+            "UP": "path/FILE:HIST_UP",
+            "DOWN": "path/FILE:HIST_DOWN",
+                "SCALE": 1.0,
+            "SIGMA": 5.0
+        },
+        "ttag_pt3_16": {
+            "ALIAS": "TTAG_PT3",
+            "CODE": 2,
+            "UP": "path/FILE:HIST_UP",
+            "DOWN": "path/FILE:HIST_DOWN",
+                "SCALE": 1.0,
+            "SIGMA": 5.0
+        }
+     },
+    
+    "BINNING": {
+        "default": {
+            "X": {
+                "NAME": "jetmass",
+                "TITLE": "m_{t} [GeV]",
+                "BINS":  [ 25, 105, 130,160, 190,210, 475],
+                "SIGSTART": 105,
+                "SIGEND": 210
+            },
+            "Y": {
+                "NAME": "resmass",
+                "TITLE": "m_{t#bar{t}} [GeV]",
+                "BINS": [800, 1100, 1300, 1500,1700,1900, 2100,2300, 2500,2700, 2900, 3100,3300, 3500, 3700,3900, 4100,6500]
+            }
+        }
+    },
+    "OPTIONS": {
+	"blindedPlots": [],
+	"blindedFit": ["fwd16Pass"],
+        "plotPrefitSigInFitB": true,
+	"plotUncerts": false,
+	"plotTitles": false,
+	"plotTemplateComparisons": false,
+	"plotEvtsPerUnit": false,
+	"year": 16
+    }
+}
