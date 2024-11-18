@@ -1,8 +1,8 @@
 #!/bin/sh
 
-dir=/afs/cern.ch/work/h/hrejebsf/private/backgroundEstimate/CMSSW_10_6_14/src/BE_LTM/results
-savedir=cards_combined_run2 
-mkdir $dir/$savedir
+dir=$PWD
+savedir=cards_combined_run2
+cp -r cards_combined_16 cards_combined_run2 
 
 combineCards.py Name1=$dir/cards_combined_16/signalRSGluon1000_area/signalRSGluon1000_card.txt Name2=$dir/cards_combined_17/signalRSGluon1000_area/signalRSGluon1000_card.txt Name3=$dir/cards_combined_18/signalRSGluon1000_area/signalRSGluon1000_card.txt > $dir/$savedir/signalRSGluon1000_area/signalRSGluon1000_card_combined.txt
 
