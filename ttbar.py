@@ -7,53 +7,67 @@ import ROOT
 import os, sys
 import numpy as np
 import json
+import argparse
+from collections import OrderedDict
+
+
+parser = argparse.ArgumentParser(description="input to the 2DAlphabet")
+parser.add_argument("--cat", type=str, help="category")
+parser.add_argument("--path", type=str, required=True, help="root files input path.")
+
+args = parser.parse_args()
+
+cat = args.cat
+path = args.path
+
+
+json_file='jsons/ttbar_'+str(cat)+'.json'
+
+args = parser.parse_args()
+
+with open(json_file, 'r') as file:
+    data = json.load(file, object_pairs_hook=OrderedDict)
+
+
+#path = [path]
+if 'GLOBAL' in data and "path" in data['GLOBAL']:
+	data['GLOBAL']['path'] = path
+
+with open(json_file, 'w') as file:
+        json.dump(data, file, indent=4)
 
 
 
-regionby = sys.argv[1]
+
 # dname = sys.argv[2]
 
 
-if len(sys.argv) > 2:
-    dname = sys.argv[2] + '_'
-else:
-    dname = ''
-
-if regionby == "cen2016":    
+dname= ''
+if cat == "cen2016":    
    params = '0x1'
 
-if regionby == "fwd2016":    
+if cat == "fwd2016":    
    params = '0x0'
 
-if regionby == "cen2017":    
+if cat == "cen2017":    
    params = '1x1'
 
-elif regionby == "fwd2017":    
+elif cat == "fwd2017":    
    params = '1x1'
 
-elif regionby == "cen2018":    
+elif cat == "cen2018":    
    params = '0x1'
 
-elif regionby == "fwd2018":    
+elif cat == "fwd2018":    
    params = '1x1'
 
 
-if len(sys.argv) > 3:
-    params = sys.argv[3]
-
-
-#params = '0x0'
-
-
-print('regionby', regionby)
 
 output_dir = 'output'
-
-# Check if the directory exists, if not, create it
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
-savedirname = 'output/ttbarfits_'+regionby+'_'+dname+params
+savedirname = 'output/ttbarfits_'+cat+'_'+dname+params
 
 print 'saving to {0}'.format(savedirname)
 
@@ -136,24 +150,24 @@ rmin = -6
 rmax = 6
 extra='--robustFit=1'
 
-# if 'cen2b' in regionby:
+# if 'cen2b' in cat:
 #     params = '1x2'
-# elif 'fwd2b' in regionby:
+# elif 'fwd2b' in cat:
 #     params = '1x2'
 
 #     rmin = -1
 #     rmax = 1
 #     extra=''
 
-# if 'fwd0b' in regionby:
+# if 'fwd0b' in cat:
 #     rmin = -50
 #     rmax = 50
     
-# if 'fwd1b' in regionby:
+# if 'fwd1b' in cat:
 #     rmin = 15
 #     rmax = 50
     
-# if 'cen0b' in regionby:
+# if 'cen0b' in cat:
 #     rmin = -5
 #     rmax = -1
 #     extra='--robustHesse=1'
@@ -215,7 +229,7 @@ def make_workspace():
     
     
     
-    twoD = TwoDAlphabet(savedirname, 'jsons/ttbar_'+regionby+'.json', loadPrevious=False)
+    twoD = TwoDAlphabet(savedirname, 'jsons/ttbar_'+cat+'.json', loadPrevious=False)
     
     # Create the data - BKGs histograms
     qcd_hists = twoD.InitQCDHists()
@@ -278,7 +292,7 @@ def ML_fit(signal):
     '''
 
     # the default workspace directory, created in make_workspace(), is called ttbarfits16_3x1/
-    twoD = TwoDAlphabet(savedirname, 'jsons/ttbar_'+regionby+'.json', loadPrevious=True)
+    twoD = TwoDAlphabet(savedirname, 'jsons/ttbar_'+cat+'.json', loadPrevious=True)
 
     # Create a subset of the primary ledger using the select() method.
     # The select() method takes as a function as its first argument
@@ -313,7 +327,7 @@ def plot_fit(signal):
     '''
     Plots the fits from ML_fit() using 2DAlphabet
     '''
-    twoD = TwoDAlphabet(savedirname, 'jsons/ttbar_'+regionby+'.json', loadPrevious=True)
+    twoD = TwoDAlphabet(savedirname, 'jsons/ttbar_'+cat+'.json', loadPrevious=True)
     subset = twoD.ledger.select(_select_signal, 'signal{}'.format(signal))
     twoD.StdPlots('ttbar-{}_area'.format(signal), subset)
 #     twoD.StdPlots('ttbar-{}_area'.format(signal), subset, prefit=True)
@@ -326,7 +340,7 @@ def perform_limit(signal):
     something reasonable to create the Asimov toy.
     '''
     # Returns a dictionary of the TF parameters with the names as keys and the post-fit values as dict values.
-    twoD = TwoDAlphabet(savedirname, 'jsons/ttbar_'+regionby+'.json', loadPrevious=True)
+    twoD = TwoDAlphabet(savedirname, 'jsons/ttbar_'+cat+'.json', loadPrevious=True)
 
     # GetParamsOnMatch() opens up the workspace's fitDiagnosticsTest.root and selects the rratio for the background
     params_to_set = twoD.GetParamsOnMatch('rratio*', 'ttbar-{}_area'.format(signal), 'b')
