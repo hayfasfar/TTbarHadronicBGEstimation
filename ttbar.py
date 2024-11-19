@@ -15,47 +15,50 @@ parser = argparse.ArgumentParser(description="input to the 2DAlphabet")
 parser.add_argument("--cat", type=str, help="category")
 parser.add_argument("--path", type=str, required=True, help="root files input path.")
 
-parser.add_argument('--senario', choices=['RSGluon', 'ZPrime'], help='Specify the signal category to process: RSGluon or ZPrime.')
+parser.add_argument('--senario', choices=['RSGluon', 'ZPrime'], required=True, help='Specify the signal senario to process limits: RSGluon or ZPrime.')
 parser.add_argument('--signal', help='Specify a single signal to process (e.g., RSGluon2000).')
+parser.add_argument('--senario_fit', choices=['RSGluon', 'ZPrime'], help='Specify the signal senario to process the fit: RSGluon or ZPrime.')
 
 
 args = parser.parse_args()
+
 
 cat = args.cat
+senario = args.senario
 path = args.path
-
-
 json_file='jsons/config/ttbar_'+str(cat)+'.json'
 
-args = parser.parse_args()
+
+
+def load_signals_from_json(json_signals, senario):
+    """Load signals from the provided JSON file."""
+    with open(json_signals, 'r') as file:
+        data = json.load(file)
+    if senario in data:
+        signals_with_prefix = ['signal' + signal for signal in data[senario]]
+        return signals_with_prefix
+    else:
+        print("Error: Scenario", senario, " not found in the JSON file.")
+        return []
+
+signals = load_signals_from_json('jsons/signals.json', senario)
+
 
 with open(json_file, 'r') as file:
     data = json.load(file, object_pairs_hook=OrderedDict)
 
 
-if 'GLOBAL' in data and "path" in data['GLOBAL']:
+if 'GLOBAL' in data :
 	data['GLOBAL']['path'] = path
-
+        data['GLOBAL']['SIGNAME']= signals
+  
 with open(json_file, 'w') as file:
         json.dump(data, file, indent=4)
-
-
 
 def get_transfer_function(cat):
     with open("jsons/TransferFunctions.json", "r") as file:
         transfer_functions = json.load(file)
     return transfer_functions[cat]
-
-
-params = get_transfer_function(cat) 
-
-
-def load_signals_from_json(json_file):
-    """Load signals from the provided JSON file."""
-    with open(json_file, 'r') as file:
-        data = json.load(file)
-    return data['RSGluon'], data['ZPrime']
-
 
 
 
@@ -68,16 +71,11 @@ def process_signals(signals):
         GoF(sig)
 
 
-
-
 dname= ''
-
-
-
+params = get_transfer_function(cat) 
 output_dir = 'output'
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
-
 savedirname = 'output/ttbarfits_'+cat+'_'+dname+params
 
 print 'saving to {0}'.format(savedirname)
@@ -442,20 +440,19 @@ def plot_signalinjection(signal, tf='', injectedAmount=2000.000, nToys=500, cond
 if __name__ == "__main__":
    
    make_workspace()
-   #RSGluon_signals, ZPrime_signals = load_signals_from_json('jsons/signals.json')
    
 
    if args.signal:
 	print("Processing single signal: {}...".format(args.signal))
         process_signals([args.signal])
 
-   elif args.senario == 'RSGluon':
+   elif args.senario_fit == 'RSGluon':
         print("Processing RSGluon signals...")
-        RSGluon_signals = load_signals_from_json('jsons/signals.json', args.senario)
+        RSGluon_signals = load_signals_from_json('jsons/signals.json', args.senario_fit)
         process_signals(RSGluon_signals)
-   elif args.senario == 'ZPrime':
+   elif args.senario_fit == 'ZPrime':
         print("Processing ZPrime signals...")
-        ZPrime_signals = load_signals_from_json('jsons/signals.json', args.senario)
+        ZPrime_signals = load_signals_from_json('jsons/signals.json', args.senario_fit)
         process_signals(ZPrime_signals)
  
 
