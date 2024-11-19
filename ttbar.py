@@ -16,7 +16,7 @@ parser.add_argument("--cat", type=str, help="category")
 parser.add_argument("--path", type=str, required=True, help="root files input path.")
 
 parser.add_argument('--senario', choices=['RSGluon', 'ZPrime'], help='Specify the signal category to process: RSGluon or ZPrime.')
-    parser.add_argument('--signal', help='Specify a single signal to process (e.g., RSGluon2000).')
+parser.add_argument('--signal', help='Specify a single signal to process (e.g., RSGluon2000).')
 
 
 args = parser.parse_args()
@@ -441,18 +441,17 @@ def plot_signalinjection(signal, tf='', injectedAmount=2000.000, nToys=500, cond
     
 if __name__ == "__main__":
    
+   make_workspace()
+   if args.category!= None : RSGluon_signals, ZPrime_signals = load_signals_from_json('jsons/signals.json')
 
-RSGluon_signals, ZPrime_signals = load_signals_from_json('jsons/signals.json')
-make_workspace()
-
-if args.signal:
+   if args.signal:
 	print("Processing single signal: {}...".format(args.signal))
         process_signals([args.signal])
 
-elif args.category == 'RSGluon':
+   elif args.category == 'RSGluon':
         print("Processing RSGluon signals...")
         process_signals(RSGluon_signals)
-elif args.category == 'ZPrime':
+   elif args.category == 'ZPrime':
         print("Processing ZPrime signals...")
         process_signals(ZPrime_signals)
  
