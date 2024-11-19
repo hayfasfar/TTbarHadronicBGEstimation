@@ -37,7 +37,7 @@ with open(json_file, 'w') as file:
 
 
 def get_transfer_function(cat):
-    with open("TransferFunctions.json", "r") as file:
+    with open("jsons/TransferFunctions.json", "r") as file:
         transfer_functions = json.load(file)
     return transfer_functions[cat]
 
@@ -195,7 +195,7 @@ def make_workspace():
     
     
     
-    twoD = TwoDAlphabet(savedirname, 'jsons/ttbar_'+cat+'.json', loadPrevious=False)
+    twoD = TwoDAlphabet(savedirname,json_file, loadPrevious=False)
     
     # Create the data - BKGs histograms
     qcd_hists = twoD.InitQCDHists()
@@ -258,7 +258,7 @@ def ML_fit(signal):
     '''
 
     # the default workspace directory, created in make_workspace(), is called ttbarfits16_3x1/
-    twoD = TwoDAlphabet(savedirname, 'jsons/ttbar_'+cat+'.json', loadPrevious=True)
+    twoD = TwoDAlphabet(savedirname,json_file, loadPrevious=True)
 
     # Create a subset of the primary ledger using the select() method.
     # The select() method takes as a function as its first argument
@@ -293,7 +293,7 @@ def plot_fit(signal):
     '''
     Plots the fits from ML_fit() using 2DAlphabet
     '''
-    twoD = TwoDAlphabet(savedirname, 'jsons/ttbar_'+cat+'.json', loadPrevious=True)
+    twoD = TwoDAlphabet(savedirname, json_file , loadPrevious=True)
     subset = twoD.ledger.select(_select_signal, 'signal{}'.format(signal))
     twoD.StdPlots('ttbar-{}_area'.format(signal), subset)
 #     twoD.StdPlots('ttbar-{}_area'.format(signal), subset, prefit=True)
@@ -306,7 +306,7 @@ def perform_limit(signal):
     something reasonable to create the Asimov toy.
     '''
     # Returns a dictionary of the TF parameters with the names as keys and the post-fit values as dict values.
-    twoD = TwoDAlphabet(savedirname, 'jsons/ttbar_'+cat+'.json', loadPrevious=True)
+    twoD = TwoDAlphabet(savedirname, json_file , loadPrevious=True)
 
     # GetParamsOnMatch() opens up the workspace's fitDiagnosticsTest.root and selects the rratio for the background
     params_to_set = twoD.GetParamsOnMatch('rratio*', 'ttbar-{}_area'.format(signal), 'b')
