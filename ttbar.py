@@ -21,7 +21,7 @@ cat = args.cat
 path = args.path
 
 
-json_file='jsons/ttbar_'+str(cat)+'.json'
+json_file='jsons/config/ttbar_'+str(cat)+'.json'
 
 args = parser.parse_args()
 
@@ -29,7 +29,6 @@ with open(json_file, 'r') as file:
     data = json.load(file, object_pairs_hook=OrderedDict)
 
 
-#path = [path]
 if 'GLOBAL' in data and "path" in data['GLOBAL']:
 	data['GLOBAL']['path'] = path
 
@@ -37,29 +36,17 @@ with open(json_file, 'w') as file:
         json.dump(data, file, indent=4)
 
 
+def get_transfer_function(cat):
+    with open("TransferFunctions.json", "r") as file:
+        transfer_functions = json.load(file)
+    return transfer_functions[cat]
 
 
-# dname = sys.argv[2]
+params = get_transfer_function(cat) 
+
 
 
 dname= ''
-if cat == "cen2016":    
-   params = '0x1'
-
-if cat == "fwd2016":    
-   params = '0x0'
-
-if cat == "cen2017":    
-   params = '1x1'
-
-elif cat == "fwd2017":    
-   params = '1x1'
-
-elif cat == "cen2018":    
-   params = '0x1'
-
-elif cat == "fwd2018":    
-   params = '1x1'
 
 
 
@@ -150,27 +137,6 @@ rmin = -6
 rmax = 6
 extra='--robustFit=1'
 
-# if 'cen2b' in cat:
-#     params = '1x2'
-# elif 'fwd2b' in cat:
-#     params = '1x2'
-
-#     rmin = -1
-#     rmax = 1
-#     extra=''
-
-# if 'fwd0b' in cat:
-#     rmin = -50
-#     rmax = 50
-    
-# if 'fwd1b' in cat:
-#     rmin = 15
-#     rmax = 50
-    
-# if 'cen0b' in cat:
-#     rmin = -5
-#     rmax = -1
-#     extra='--robustHesse=1'
 
 # for b*, the P/F regions are named MtwvMtPass and MtwvMtFail
 # so, just need to find and replace Pass/Fail depending on which region we want
