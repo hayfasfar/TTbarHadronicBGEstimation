@@ -442,17 +442,20 @@ def plot_signalinjection(signal, tf='', injectedAmount=2000.000, nToys=500, cond
 if __name__ == "__main__":
    
    make_workspace()
-   if args.category!= None : RSGluon_signals, ZPrime_signals = load_signals_from_json('jsons/signals.json')
+   #RSGluon_signals, ZPrime_signals = load_signals_from_json('jsons/signals.json')
+   
 
    if args.signal:
 	print("Processing single signal: {}...".format(args.signal))
         process_signals([args.signal])
 
-   elif args.category == 'RSGluon':
+   elif args.senario == 'RSGluon':
         print("Processing RSGluon signals...")
+        RSGluon_signals = load_signals_from_json('jsons/signals.json', args.senario)
         process_signals(RSGluon_signals)
-   elif args.category == 'ZPrime':
+   elif args.senario == 'ZPrime':
         print("Processing ZPrime signals...")
+        ZPrime_signals = load_signals_from_json('jsons/signals.json', args.senario)
         process_signals(ZPrime_signals)
  
 
