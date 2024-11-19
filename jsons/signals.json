@@ -1,0 +1,19 @@
+{
+    "RSGluon": [
+        "RSGluon1000",
+        "RSGluon1500",
+        "RSGluon2000",
+        "RSGluon2500",
+        "RSGluon3000",
+        "RSGluon3500",
+        "RSGluon4000",
+        "RSGluon4500",
+        "RSGluon5000",
+        "RSGluon5500",
+        "RSGluon6000"
+    ],
+    "ZPrime": [
+        "ZPrime2000_10",
+    ]
+}
+

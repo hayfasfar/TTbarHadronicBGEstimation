@@ -15,6 +15,10 @@ parser = argparse.ArgumentParser(description="input to the 2DAlphabet")
 parser.add_argument("--cat", type=str, help="category")
 parser.add_argument("--path", type=str, required=True, help="root files input path.")
 
+parser.add_argument('--senario', choices=['RSGluon', 'ZPrime'], help='Specify the signal category to process: RSGluon or ZPrime.')
+    parser.add_argument('--signal', help='Specify a single signal to process (e.g., RSGluon2000).')
+
+
 args = parser.parse_args()
 
 cat = args.cat
@@ -36,6 +40,7 @@ with open(json_file, 'w') as file:
         json.dump(data, file, indent=4)
 
 
+
 def get_transfer_function(cat):
     with open("jsons/TransferFunctions.json", "r") as file:
         transfer_functions = json.load(file)
@@ -43,6 +48,25 @@ def get_transfer_function(cat):
 
 
 params = get_transfer_function(cat) 
+
+
+def load_signals_from_json(json_file):
+    """Load signals from the provided JSON file."""
+    with open(json_file, 'r') as file:
+        data = json.load(file)
+    return data['RSGluon'], data['ZPrime']
+
+
+
+
+def process_signals(signals):
+    """Process the given list of signals."""
+    for sig in signals:
+        ML_fit(sig)
+        plot_fit(sig)
+        perform_limit(sig)
+        GoF(sig)
+
 
 
 
@@ -401,29 +425,14 @@ def plot_GoF(signal, tf='', condor=False):
     Plot the Goodness of Fit as the measured saturated test statistic in data 
     compared against the distribution obtained from the toys. 
     '''
-    
-    eos = '/eos/home-m/mmorris/Documents/TTbarResonance/backgroundEstimate/restarting_10172023/CMSSW_10_6_14/src/BstarToTW_CMSDAS2023_BackgroundEstimation/tight_v4/2016/'+savedirname + '/'
-    
-    afs = '/afs/cern.ch/user/m/mmorris/BackgroundEstimation/new/CMSSW_10_6_14/src/stat_tests/tight_v4/2016/'+savedirname
-
-
     plot.plot_gof(savedirname, 'signal{}_area'.format(signal), condor=condor)
 
-    
-#     plot.plot_gof(afs, 'signal{}_area'.format(signal), condor=condor)
-
-    
-    
     
 def plot_signalinjection(signal, tf='', injectedAmount=2000.000, nToys=500, condor=False):
     '''
     Plot the Goodness of Fit as the measured saturated test statistic in data 
     compared against the distribution obtained from the toys. 
     '''
-    
-    eos = '/eos/home-m/mmorris/Documents/TTbarResonance/backgroundEstimate/restarting_10172023/CMSSW_10_6_14/src/BstarToTW_CMSDAS2023_BackgroundEstimation/tight_v4/2016/'+savedirname + '/'
-    
-    afs = '/afs/cern.ch/user/m/mmorris/BackgroundEstimation/new/CMSSW_10_6_14/src/condor_limits/tight_v4/2016/ttbarfits_inclusive/'
 
 #     plot.plot_signalInjection(savedirname, 'signal{}_area'.format(signal), condor=condor)
     plot.plot_signalInjection(savedirname, 'signal{}_area'.format(signal), injectedAmount=injectedAmount, seed=123456, stats=True, condor=False)
@@ -431,32 +440,21 @@ def plot_signalinjection(signal, tf='', injectedAmount=2000.000, nToys=500, cond
     
     
 if __name__ == "__main__":
-    
-    sig = 'RSGluon2000'
-    #sig = 'ZPrime2500_1'
+   
 
+RSGluon_signals, ZPrime_signals = load_signals_from_json('jsons/signals.json')
+make_workspace()
 
-    signals = [
-#                 "RSGluon1000",
-#                 "RSGluon1500",
-                  "RSGluon2000",
-#                 "RSGluon2500",
-#                 "RSGluon3000",
-#                 "RSGluon3500",
-#                 "RSGluon4000",
-#                 "RSGluon4500",
-#                 "RSGluon5000",
-#                 "RSGluon5500",
-#                 "RSGluon6000",
-#                   "ZPrime2000_10",
-        
-              ]
-    make_workspace()
+if args.signal:
+	print("Processing single signal: {}...".format(args.signal))
+        process_signals([args.signal])
 
-    for sig in signals:
-        ML_fit(sig)        # Perform the maximum likelihood fit for a given signal mass
-        plot_fit(sig)      # Plot the postfit results, includinng nuisance pulls and 1D projections
-        perform_limit(sig) # Calculate the limit
-        GoF(sig)
-        #plot_GoF(sig)
+elif args.category == 'RSGluon':
+        print("Processing RSGluon signals...")
+        process_signals(RSGluon_signals)
+elif args.category == 'ZPrime':
+        print("Processing ZPrime signals...")
+        process_signals(ZPrime_signals)
+ 
+
 
