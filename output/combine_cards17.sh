@@ -2,11 +2,11 @@
 
 dir=$PWD
 savedir=cards_combined_17
-tag0=1x1
-tag1=1x1
+
+tag0=$(jq -r '.cen2017' ../jsons/TransferFunctions.json)
+tag1=$(jq -r '.fwd2017' ../jsons/TransferFunctions.json)
 year=2017
 cp -r ttbarfits_cen2017_$tag0 cards_combined_17
-#mkdir $dir/$savedir
 
 
 combineCards.py Name1=$dir/ttbarfits_cen2017_$tag0/signalRSGluon1000_area/card.txt Name2=$dir/ttbarfits_fwd2017_$tag1/signalRSGluon1000_area/card.txt > $dir/$savedir/signalRSGluon1000_area/signalRSGluon1000_card.txt

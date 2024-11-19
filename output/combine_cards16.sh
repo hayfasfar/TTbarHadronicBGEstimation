@@ -2,8 +2,9 @@
 
 dir=$PWD
 savedir=cards_combined_16
-tag0=0x1
-tag1=0x0
+tag0=$(jq -r '.cen2016' ../jsons/TransferFunctions.json)
+tag1=$(jq -r '.fwd2016' ../jsons/TransferFunctions.json)
+
 year=2016
 cp -r ttbarfits_cen2016_$tag0 cards_combined_16
 #mkdir $dir/$savedir
