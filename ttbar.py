@@ -14,18 +14,19 @@ from collections import OrderedDict
 parser = argparse.ArgumentParser(description="input to the 2DAlphabet")
 parser.add_argument("--cat", type=str, help="category")
 parser.add_argument("--path", type=str, required=True, help="root files input path.")
-
 parser.add_argument('--senario', choices=['RSGluon', 'ZPrime'], required=True, help='Specify the signal senario to process limits: RSGluon or ZPrime.')
 parser.add_argument('--signal', help='Specify a single signal to process (e.g., RSGluon2000).')
 parser.add_argument('--senario_fit', choices=['RSGluon', 'ZPrime'], help='Specify the signal senario to process the fit: RSGluon or ZPrime.')
-
-
+parser.add_argument("--tf", type=str, help="TF in case of Ftest study")
+parser.add_argument("--study", ['ftest', 'limit', 'fit', 'all'], default = 'all', type=str, help="running ttbar for specific study.")
 args = parser.parse_args()
 
 
 cat = args.cat
 senario = args.senario
 path = args.path
+tf = args.tf
+
 json_file='jsons/config/ttbar_'+str(cat)+'.json'
 
 
@@ -72,7 +73,12 @@ def process_signals(signals):
 
 
 dname= ''
-params = get_transfer_function(cat) 
+if study == 'ftest' : 
+   params = tf
+   dname ='ftest'
+else : 
+   params = get_transfer_function(cat)
+ 
 output_dir = 'output'
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
