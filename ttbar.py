@@ -13,7 +13,8 @@ from collections import OrderedDict
 
 parser = argparse.ArgumentParser(description="input to the 2DAlphabet")
 parser.add_argument('--cat', type=str, help="category")
-parser.add_argument('--path', type=str, required=True, help="root files input path.")
+parser.add_argument('--input', type=str, required=True, help="root files input path.")
+parser.add_argument('--output', type=str, default='output', help="root files input path.")
 parser.add_argument('--senario', choices=['RSGluon', 'ZPrime'], required=True, help='Specify the signal senario to process limits: RSGluon or ZPrime.')
 parser.add_argument('--signal', help='Specify a single signal to process (e.g., RSGluon2000).')
 parser.add_argument('--senario_fit', choices=['RSGluon', 'ZPrime'], help='Specify the signal senario to process the fit: RSGluon or ZPrime.')
@@ -24,12 +25,13 @@ args = parser.parse_args()
 
 cat = args.cat
 senario = args.senario
-path = args.path
+path = args.input
 tf = args.tf
 study = args.study
-physical_path = "/afs/cern.ch/work/h/hrejebsf/private/backgroundEstimate/CMSSW_10_6_14/src/TTbarHadronicBGEstimation"
-json_file=physical_path+'/jsons/config/ttbar_'+str(cat)+'.json'
+output_dir = args.output
 
+json_file='jsons/config/ttbar_'+str(cat)+'.json'
+print ('json_file is', json_file)
 print ('json file config is ', json_file)
 
 def load_signals_from_json(json_signals, senario):
@@ -43,7 +45,7 @@ def load_signals_from_json(json_signals, senario):
         print("Error: Scenario", senario, " not found in the JSON file.")
         return []
 
-signals = load_signals_from_json(physical_path+'/jsons/signals.json', senario)
+signals = load_signals_from_json('jsons/signals.json', senario)
 
 
 with open(json_file, 'r') as file:
@@ -64,12 +66,15 @@ def get_transfer_function(cat):
 
 
 
-def process_signals(signals):
+def process_signals(signals, study):
     """Process the given list of signals."""
     for sig in signals:
+      if study == 'all' or study == 'ftest':
         ML_fit(sig)
         plot_fit(sig)
+      if study =='all' or study =='limit': 
         perform_limit(sig)
+      if study=='all': 
         GoF(sig)
 
 
@@ -80,10 +85,9 @@ if study == 'ftest' :
 else : 
    params = get_transfer_function(cat)
  
-output_dir = 'output'
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
-savedirname = 'output/ttbarfits_'+cat+'_'+dname+params
+savedirname = output_dir+'/ttbarfits_'+cat+'_'+dname+params
 
 print 'saving to {0}'.format(savedirname)
 
@@ -456,11 +460,11 @@ if __name__ == "__main__":
    elif args.senario_fit == 'RSGluon':
         print("Processing RSGluon signals...")
         RSGluon_signals = load_signals_from_json('jsons/signals.json', args.senario_fit)
-        process_signals(RSGluon_signals)
+        process_signals(RSGluon_signals, study)
    elif args.senario_fit == 'ZPrime':
         print("Processing ZPrime signals...")
         ZPrime_signals = load_signals_from_json('jsons/signals.json', args.senario_fit)
-        process_signals(ZPrime_signals)
+        process_signals(ZPrime_signals, study)
  
 
 

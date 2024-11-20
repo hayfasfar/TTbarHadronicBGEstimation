@@ -16,34 +16,19 @@ params_list = ['0x0', '0x1', '0x2', '1x0', '1x1', '1x2', '2x1', '2x2']
 def run_fits():
     for region in regions:
         # Construct the working directory for each region
-        wdir = os.path.join(year, region)
+        wdir = os.path.join('ftest',year, region)
         if not os.path.exists(wdir):
 	   os.makedirs(wdir)
 
-        # Construct the json file name
-        jsonfile = 'ttbar_' + region + year + '.json'
 
-        print "Using JSON file:", jsonfile
-        print "Changing directory to:", wdir
+        print "output directory is:", wdir
 
-        # Change to the region's directory
-        os.chdir(wdir)
         os.system('pwd')
         # Loop over the parameters and run the ftest for each
         for i,params in enumerate(params_list):
             print "Running ftest for", region, year, "with params:", params
-            os.system('nohup python ../../ttbar.py  --cat ' + region + year + ' --tf '+ params + ' --study ftest --senario RSGluon --path /eos/home-h/hrejebsf/2Dalphabet_files/files_loosetomedium_Sep24 --signal RSGluon2000 ' + '> output'+str(i)+'.log 2>&1 &' )
+            os.system('nohup python ttbar.py  --cat ' + region + year + ' --tf '+ params + ' --study ftest --senario RSGluon --input /eos/home-h/hrejebsf/2Dalphabet_files/files_loosetomedium_Sep24 --output '+str(wdir)+' --signal RSGluon2000 ' + '> output'+str(i)+'.log 2>&1 &' )
 
-            #ftests_dir = os.path.join(wdir, "ftests")  # Adjust the base directory as needed
-
-            #if not os.path.exists(ftests_dir): os.makedirs(ftests_dir)  # Create the directory if it doesn't exist
-
-            # Move only the ftest outputs to the 'ftests' folder
-            #os.system('mv *_ftest* ftests')
-
-        # After processing the region, go back to the parent directory
-        os.chdir('../../')
-        os.system('pwd')
 
 # Run the fits
 run_fits()
