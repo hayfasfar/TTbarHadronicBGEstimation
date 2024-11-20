@@ -3,7 +3,7 @@ import os
 import sys
 
 # Default year is 2016, or use the one passed via command line argument
-if (len(sys.argv) > 1) and (sys.argv[1] in ['2016', '2017', '2018']):
+if (len(sys.argv) >= 1) and (sys.argv[1] in ['2016', '2017', '2018']):
     year = sys.argv[1]
 else:
     year = '2016'
@@ -17,9 +17,11 @@ def run_fits():
     for region in regions:
         # Construct the working directory for each region
         wdir = os.path.join(year, region)
+        if not os.path.exists(wdir):
+	   os.makedirs(wdir)
 
         # Construct the json file name
-        #jsonfile = 'ttbar_' + region + year + '.json'
+        jsonfile = 'ttbar_' + region + year + '.json'
 
         print "Using JSON file:", jsonfile
         print "Changing directory to:", wdir
@@ -27,17 +29,17 @@ def run_fits():
         # Change to the region's directory
         os.chdir(wdir)
         os.system('pwd')
-
         # Loop over the parameters and run the ftest for each
-        for i,params in enumarate(params_list):
+        for i,params in enumerate(params_list):
             print "Running ftest for", region, year, "with params:", params
-            os.system('nohup python ../../ttbar.py  --cat ' + region + year + ' --tf'+ params + '--study ftest --senario RSGluon --path /eos/home-h/hrejebsf/2Dalphabet_files/files_loosetomedium_Sep24 --signal RSGluon2000 ' + '> output'+i+'.log 2>&1 &' )
+            os.system('nohup python ../../ttbar.py  --cat ' + region + year + ' --tf '+ params + ' --study ftest --senario RSGluon --path /eos/home-h/hrejebsf/2Dalphabet_files/files_loosetomedium_Sep24 --signal RSGluon2000 ' + '> output'+str(i)+'.log 2>&1 &' )
+
+            #ftests_dir = os.path.join(wdir, "ftests")  # Adjust the base directory as needed
+
+            #if not os.path.exists(ftests_dir): os.makedirs(ftests_dir)  # Create the directory if it doesn't exist
 
             # Move only the ftest outputs to the 'ftests' folder
-            os.system('mv *_ftest* ftests')
-
-            # Optionally remove temporary files, like 'new.json'
-            os.system('rm new.json')
+            #os.system('mv *_ftest* ftests')
 
         # After processing the region, go back to the parent directory
         os.chdir('../../')
