@@ -32,7 +32,6 @@ output_dir = args.output
 
 json_file='jsons/config/ttbar_'+str(cat)+'.json'
 print ('json_file is', json_file)
-print ('json file config is ', json_file)
 
 def load_signals_from_json(json_signals, senario):
     """Load signals from the provided JSON file."""
