@@ -7,10 +7,10 @@ from TwoDAlphabet.alphawrap import BinnedDistribution, ParametricFunction
 from TwoDAlphabet.helpers import make_env_tarball, cd, execute_cmd
 from TwoDAlphabet.ftest import FstatCalc
 import multiprocessing
-
+from ROOT import TF1, TH1F, TLegend, TPaveText, TLatex, TArrow, TCanvas, kBlue, gStyle
 
 # Define regions and parameters
-regions = ['cen', 'fwd']
+regions = ['cen']
 
 nParams_dict = {
     '0x0': 1,
@@ -21,22 +21,21 @@ nParams_dict = {
     '1x1': 3,
     '2x1': 4,
     '1x2': 4,
-    '2x2': 5,
-    '3x1': 5,
-    '1x3': 5,
-    '2x3': 6,
-    '3x2': 6,
-    '3x3': 7,
+    '2x2': 4,
 }
 
 
 
-def ensure_directory(directory):
+def ensure_input_directory(directory):
     """Create directory if it does not exist."""
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-    else:
-        print("Warning: Directory {} already exists.".format(directory))
+    if os.path.exists(directory):
+        print("Directory {}".format(directory))
+    else : print ("FATAL: no directory for the given configuration")
+def create_output_directory(output): 
+    if os.path.exists(output): 
+       print("output directory {} already exist")
+    else: 
+       os.mkdir(output)
 
 def _select_signal(row, args):
     """Helper function to filter signal rows."""
@@ -71,8 +70,8 @@ def FTest(poly1, poly2, directory, regionby, year):
     poly1 (str): e.g. '0x0', '1x1', ...
     poly2 (str): e.g. '0x0', '1x1', ...
     '''
-    area1 = directory + 'ttbarfits_' + regionby + year + '_ftest_{}'.format(poly1)
-    area2 = directory + 'ttbarfits_' + regionby + year + '_ftest_{}'.format(poly2)
+    area1 = directory + '/ttbarfits_' + regionby + str(year) + '_ftest{}'.format(poly1)
+    area2 = directory + '/ttbarfits_' + regionby + str(year) + '_ftest{}'.format(poly2)
 
     print('getting file {}/runConfig.json'.format(area1))
 
@@ -98,14 +97,14 @@ def FTest(poly1, poly2, directory, regionby, year):
     rpfSet2 = params2[params2["name"].str.contains("rratio")]
     nRpfs2 = len(rpfSet2.index)
     nRpfs2 = nParams_dict[poly2]
-
+    if abs(nRpfs2 - nRpfs1) < 0.1: return 0
     _gof_for_FTest(twoD2, 'ttbar-RSGluon2000_area', card_or_w='card.txt')
     gofFile2 = area2 + '/ttbar-RSGluon2000_area/higgsCombine_gof_data.GoodnessOfFit.mH120.root'
 
     # Perform F-test and plot results
-    fstat = FstatCalc(gofFile1, gofFile2)
-    fstat.generate_fstat()
-    plot_FTest(fstat.base_fstat, nRpfs1, nRpfs2, nBins, poly1, poly2, regionby, year)
+    base_fstat = FstatCalc(gofFile1,gofFile2,nRpfs1,nRpfs2,nBins)
+    print 'base_fstat', base_fstat
+    plot_FTest(base_fstat, nRpfs1, nRpfs2, nBins, poly1, poly2, regionby, year)
    
 
 
@@ -128,7 +127,7 @@ def plot_FTest(base_fstat, nRpfs1, nRpfs2, nBins, poly1, poly2, regionby, year):
     pval = fdist.Integral(0.0, base_fstat[0])
 
     # Save the results to a file
-    with open('ftest_results_' + regionby + year + '.txt', 'a') as outfile:
+    with open('ftest_results_' + regionby + str(year) + '.txt', 'a') as outfile:
         outfile.write(poly1 + ', ' + poly2 + ', ' + str(1 - pval) + '\n')
 
     # Plot the F-test results
@@ -190,15 +189,28 @@ def plot_FTest(base_fstat, nRpfs1, nRpfs2, nBins, poly1, poly2, regionby, year):
     else:
         latex.DrawLatex(0.72, 0.91, "2016-2018 (13 TeV)")
 
-    c.SaveAs('FTest_{}_{}_{}.png'.format(poly1, poly2, year))
+    c.SaveAs('{}/FTest_{}_{}_{}_{}.png'.format(output,poly1, poly2, year, regionby))
 
 
+years = ['2017','2018']
+output = 'ftest_results'
+params_list = [
+                '0x0',
+                '0x1',
+                '0x2',
+                '1x0',
+                '1x1',
+                '1x2',
+                '2x1',
+                '2x2'
+            ]
 
 if __name__ == "__main__":
+  for year in years :
     for region in regions:
         directory = os.path.abspath('ftest/{}/{}/'.format(year, region))
-        ensure_directory(directory)
-
+        ensure_input_directory(directory)
+        create_output_directory(output)
         for i in range(len(params_list)):
             for j in range(i + 1, len(params_list)):
                 FTest(params_list[i], params_list[j], directory, region, year)

@@ -70,8 +70,8 @@ def process_signals(signals, study):
     for sig in signals:
       if study == 'all' or study == 'ftest':
         ML_fit(sig)
-        plot_fit(sig)
-      if study =='all' or study =='limit': 
+        #plot_fit(sig)
+      if study =='all' or study =='limit':
         perform_limit(sig)
       if study=='all': 
         GoF(sig)
@@ -454,7 +454,7 @@ if __name__ == "__main__":
 
    if args.signal:
 	print("Processing single signal: {}...".format(args.signal))
-        process_signals([args.signal])
+        process_signals([args.signal],study)
 
    elif args.senario_fit == 'RSGluon':
         print("Processing RSGluon signals...")

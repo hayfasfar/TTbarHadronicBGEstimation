@@ -30,12 +30,14 @@ def run_fits():
         for i,params in enumerate(params_list):
             print "Running ftest for", region, year, "with params:", params
             cmd = (
-                'nohup python ttbar.py '
-                '--cat {}{} --tf {} --study ftest --scenario RSGluon '
-                '--input /eos/home-h/hrejebsf/2Dalphabet_files/files_loosetomedium_Sep24 '
-                '--output {} --signal RSGluon2000 > output{}.log 2>&1 &'
-            ).format(region, year, params, wdir, i)
+              "nohup python ttbar.py "
+                "--cat {region}{year} --tf {params} --study ftest --senario RSGluon "
+                "--input /eos/home-h/hrejebsf/2Dalphabet_files/files_loosetomedium_Sep24 "
+                "--output {wdir} --signal RSGluon2000 > output{i}.log 2>&1 &"
+            ).format(region=region, year=year, params=params, wdir=wdir, i=i)
+            
             os.system(cmd)
 
-	run_fits()
+
+run_fits()
 
