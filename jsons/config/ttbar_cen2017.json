@@ -204,8 +204,8 @@
                     25, 
                     105, 
                     130, 
-                    160, 
-                    190, 
+                    155, 
+                    175, 
                     210, 
                     475
                 ], 
@@ -231,7 +231,6 @@
                     3300, 
                     3500, 
                     3700, 
-                    3900, 
                     4100, 
                     6500
                 ]
@@ -240,9 +239,7 @@
     }, 
     "OPTIONS": {
         "blindedPlots": [], 
-        "blindedFit": [
-            "cen17Pass"
-        ], 
+        "blindedFit": [], 
         "plotPrefitSigInFitB": true, 
         "plotUncerts": false, 
         "plotTitles": false, 

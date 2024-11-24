@@ -72,6 +72,7 @@ def process_signals(signals, study):
         ML_fit(sig)
         #plot_fit(sig)
       if study =='all' or study =='limit':
+        #rint('gain time')
         perform_limit(sig)
       if study=='all': 
         GoF(sig)
