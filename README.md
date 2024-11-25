@@ -25,7 +25,7 @@ git clone <your-fork-url>
 To obtain fit results for both central and forward categories for each year (2016, 2017, and 2018), simply run:
 
 ```bash
-bash run_fit.sh
+source run_fit.sh
 ```
 This will execute the ttbar.py script for different scenarios. You can choose to run fits, limits, and goodness-of-fit (GOF) tests using the all argument, or adjust the argument based on your needs.
 
