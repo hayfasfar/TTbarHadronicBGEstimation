@@ -27,9 +27,9 @@ To obtain fit results for both central and forward categories for each year (201
 ```bash
 source run_fit.sh
 ```
-This will execute the ttbar.py script for different scenarios. You can choose to run fits, limits, and goodness-of-fit (GOF) tests using the all argument, or adjust the argument based on your needs.
+This will execute the ttbar.py script for different scenarios. You can choose to run fits, limits, and goodness-of-fit (GOF) tests using the "--all" argument, or adjust the argument based on your needs.
 
-Fit results for a given category will be stored under the output/ directory.
+Fit results for a given category will be stored under the "output/" directory.
 
 ### Combining Cards
 
