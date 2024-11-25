@@ -1,10 +1,5 @@
 # **TTbar Hadronic Background Estimation**
 
-## **Overview**
-This repository provides tools for estimating the hadronic background in tt̄ events using the 2DAlphabet package. It includes scripts for performing fits, extracting transfer functions (TFs), and combining results for different datasets.
-
----
-
 ## **Requirements**
 The **Background estimation** directory requires the **2DAlphabet** package to run. You can find it [here](<Add link>).
 
