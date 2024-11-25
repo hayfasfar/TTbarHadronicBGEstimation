@@ -9,7 +9,7 @@ from TwoDAlphabet.ftest import FstatCalc
 import multiprocessing
 
 # Default year is 2016, or use the one passed via command line argument
-if (len(sys.argv) >= 1) and (sys.argv[1] in ['2016', '2017', '2018']):
+if (len(sys.argv) >1):
     years = sys.argv[1]
 else:
     years = ['2016','2017','2018']
