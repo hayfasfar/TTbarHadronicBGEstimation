@@ -58,7 +58,11 @@ text2workspace.py  output/cards_combined_run2/signalRSGluon2000_area/signalRSGlu
 
 combineTool.py -M Impacts -d workspace.root -m 1 --doInitialFit --robustFit 1 --expectSignal=1 --rMin -1  --job-mode condor 
 
-combineTool.py -M Impacts -d workspace.root -m 1 --robustFit 1 --doFits --parallel 16 --expectSignal=1  --job-mode condor 
+combineTool.py -M Impacts -d workspace.root -m 1 --robustFit 1 --doFits --parallel 16 --expectSignal=1  --job-mode condor
+
+combineTool.py -M Impacts -d workspace.root -m 1 -o impacts.json
+
+plotImpacts.py -i impacts.json -o impacts -t rename.json --units pb
 ```
 
 ### Transfer functions 
