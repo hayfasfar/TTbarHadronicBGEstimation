@@ -31,7 +31,7 @@ This will execute the ttbar.py script for different scenarios. You can choose to
 
 Fit results for a given category will be stored under the "output/" directory.
 
-### Combining Cards
+### Combining datacards
 
 To combine cards for a specific year:
 
@@ -46,6 +46,10 @@ Once these cards are combined, you can run the Run-2 combination using:
 ```bash 
 source combined_cards_run2.sh
 ```
+### Goodness of fit (GOF)
+
+### Impact plot
+
 
 ### Transfer functions 
 
