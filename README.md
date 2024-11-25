@@ -55,7 +55,7 @@ The transfer functions (TFs) are stored in jsons/TransferFunctions.json. If you 
 
 python fit_ftest.py
 ```
-This will perform the fit using different transfer functions. To compare the results for different transfer functions, perform an F-test and plot the results using:
+This will perform the fit using different transfer functions. To perform an F-test and plot the results second run:
 
 ```bash 
 python results_ftest.py
