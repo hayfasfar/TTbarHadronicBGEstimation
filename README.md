@@ -60,4 +60,4 @@ This will perform the fit using different transfer functions. To perform an F-te
 ```bash 
 python results_ftest.py
 ```
-All F-test results will be stored in the ftest_results/ directory.
+All F-test results will be stored in the "ftest_results/" directory.
