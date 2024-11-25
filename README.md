@@ -48,8 +48,18 @@ source combined_cards_run2.sh
 ```
 ### Goodness of fit (GOF)
 
+Coming soon
+
 ### Impact plot
 
+For blinded Impact add -t -1 : 
+```bash
+text2workspace.py  output/cards_combined_run2/signalRSGluon2000_area/signalRSGluon2000_card_combined.txt  -o workspace.root
+
+combineTool.py -M Impacts -d workspace.root -m 1 --doInitialFit --robustFit 1 --expectSignal=1 --rMin -1  --job-mode condor 
+
+combineTool.py -M Impacts -d workspace.root -m 1 --robustFit 1 --doFits --parallel 16 --expectSignal=1  --job-mode condor 
+```
 
 ### Transfer functions 
 
