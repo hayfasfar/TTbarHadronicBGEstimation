@@ -1,7 +1,7 @@
 # **TTbar Hadronic Background Estimation**
 
 ## **Requirements**
-The **Background estimation** directory requires the **2DAlphabet** package to run. You can find it [here](<Add link>).
+This directory requires the **2DAlphabet** package to run. You can find it [here](<Add link>).
 
 ---
 
