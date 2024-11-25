@@ -10,15 +10,16 @@ import multiprocessing
 
 # Default year is 2016, or use the one passed via command line argument
 if (len(sys.argv) >= 1) and (sys.argv[1] in ['2016', '2017', '2018']):
-    year = sys.argv[1]
+    years = sys.argv[1]
 else:
-    year = '2016'
+    years = ['2016','2017','2018']
 
 # Define regions and parameters
 regions = ['cen', 'fwd']
 params_list = ['0x0', '0x1', '0x2', '1x0', '1x1', '1x2', '2x1', '2x2']
 
 def run_fits():
+  for year in years : 
     for region in regions:
         # Construct the working directory for each region
         wdir = os.path.join('ftest',year, region)

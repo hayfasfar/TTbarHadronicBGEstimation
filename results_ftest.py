@@ -10,7 +10,7 @@ import multiprocessing
 from ROOT import TF1, TH1F, TLegend, TPaveText, TLatex, TArrow, TCanvas, kBlue, gStyle
 
 # Define regions and parameters
-regions = ['cen']
+regions = ['cen','fwd']
 
 nParams_dict = {
     '0x0': 1,
@@ -191,8 +191,11 @@ def plot_FTest(base_fstat, nRpfs1, nRpfs2, nBins, poly1, poly2, regionby, year):
 
     c.SaveAs('{}/FTest_{}_{}_{}_{}.png'.format(output,poly1, poly2, year, regionby))
 
+if (len(sys.argv) >= 1) and (sys.argv[1] in ['2016', '2017', '2018']):
+    years = sys.argv[1]
+else:
+    years = ['2016','2017','2018']
 
-years = ['2017','2018']
 output = 'ftest_results'
 params_list = [
                 '0x0',
