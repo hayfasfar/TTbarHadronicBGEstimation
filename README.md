@@ -55,7 +55,7 @@ Run the Fit diagnostics to check the sanity of the fit and systematic uncertaint
 Example using combined 2017 i.e central and forward 2017 combined categories: 
 ```bash 
 text2workspace.py  output/cards_combined_17/signalRSGluon2000_area/signalRSGluon2000_card.txt  -o workspace.root
-combine -M FitDiagnostics workspace.root -m 1 --rMin -20 --rMax 20 --saveShapes --saveWithUncertainties -n .combined2017
+combine -M FitDiagnostics workspace.root -m 1 --rMin -1 --rMax 2 --saveShapes --saveWithUncertainties -n .combined2017
 ```
 ### Impact plot
 
