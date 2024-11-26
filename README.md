@@ -53,10 +53,10 @@ Coming soon
 ### Fit Diagnostics 
 Run the Fit diagnostics to check the sanity of the fit and systematic uncertainties: you can do it per category, per year or for combined run2:
 Example using combined 2017 i.e central and forward 2017 combined categories: 
-
+```bash 
 text2workspace.py  output/cards_combined_17/signalRSGluon2000_area/signalRSGluon2000_card.txt  -o workspace.root
 combine -M FitDiagnostics workspace.root -m 1 --rMin -20 --rMax 20 --saveShapes --saveWithUncertainties -n .combined2017
-
+```
 ### Impact plot
 
 To get Run2 Impact plot run the following command lines, if you want to run it only for one year, consider changing the datacard accordingly. For unblinded Impact remove -t -1 : 
