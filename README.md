@@ -67,7 +67,7 @@ combineTool.py -M Impacts -d workspace.root -m 1 --robustFit 1 --doFits --parall
 combineTool.py -M Impacts -d workspace.root -m 1 -o impacts.json
 plotImpacts.py -i impacts.json -o impacts  --units pb
 ```
-To remove QCD bins from the impact plot for visualisation purpose, you can do: 
+To remove QCD bins from the impact plot for visualisation purpose, you can do this before plotting it: 
 ```bash
 python remove_constraints.py -i impact.json -o impact.json
 ```
