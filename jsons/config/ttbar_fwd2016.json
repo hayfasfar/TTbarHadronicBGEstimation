@@ -170,7 +170,7 @@
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
             "SCALE": 1.0, 
-            "SIGMA": 5.0
+            "SIGMA": 1.0
         }, 
         "ttag_pt2_16": {
             "ALIAS": "TTAG_PT2", 
@@ -178,7 +178,7 @@
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
             "SCALE": 1.0, 
-            "SIGMA": 5.0
+            "SIGMA": 1.0
         }, 
         "ttag_pt3_16": {
             "ALIAS": "TTAG_PT3", 
@@ -186,7 +186,7 @@
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
             "SCALE": 1.0, 
-            "SIGMA": 5.0
+            "SIGMA": 1.0
         }
     }, 
     "BINNING": {
@@ -198,8 +198,12 @@
                     25, 
                     105, 
                     130, 
-                    155, 
+                    150, 
+                    170, 
                     175, 
+                    180, 
+                    185, 
+                    190, 
                     210, 
                     475
                 ], 
