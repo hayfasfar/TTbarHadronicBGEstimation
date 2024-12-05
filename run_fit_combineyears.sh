@@ -1,0 +1,2 @@
+nohup python ttbar.py --cat cenComb --senario RSGluon --input /afs/cern.ch/user/s/srappocc/TTBarRes/CMSSW_10_6_14/src/TTbarHadronicBGEstimation/files_loosetomedium_Sep24_Comb --signal RSGluon2000 > output1.log 2>&1 &
+nohup python ttbar.py --cat fwdComb --senario RSGluon --input /afs/cern.ch/user/s/srappocc/TTBarRes/CMSSW_10_6_14/src/TTbarHadronicBGEstimation/files_loosetomedium_Sep24_Comb --signal RSGluon2000 > output2.log 2>&1 &
