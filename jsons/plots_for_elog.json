@@ -1,0 +1,13 @@
+{
+    "FIGURES":{
+	"nuisance_pulls.pdf":"Nuisance parameter plot",
+	"plots_fit_b/correlation_matrix.pdf":"Correlation matrix, bkg only",
+	"plots_fit_b/postfit_projx_logy.pdf":"Postfit plots wrt top mass, logy",
+	"plots_fit_b/postfit_projx.pdf":"Postfit plots wrt top mass, logy",
+	"plots_fit_b/postfit_projy_logy.pdf":"Postfit plots wrt ttbar mass, logy",
+	"plots_fit_b/postfit_projy.pdf":"Postfit plots wrt ttbar mass, logy"
+    },
+    "SIGNALS":{
+	"ttbar-RSGluon2000_area":"ttbar and RSGluon m = 2000 GeV"
+    }
+}
