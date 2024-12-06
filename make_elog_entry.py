@@ -45,7 +45,7 @@ def make_elog_entry(args):
                 if isig[-1] != '/':
                     isig = isig + '/'
                 for iplot,idescription in figs_to_plot_json['FIGURES'].items():
-                    fout.write( '|[%s](%s) | %s |\n' % (idescription, maindir + isig + iplot, idescription )) 
+                    fout.write( '| <image src="%s">x | %s |\n' % (maindir + isig + iplot, idescription )) 
                     list_of_plots_to_write.append( maindir + isig + iplot )
             for iplot,plot in enumerate(list_of_plots_to_write):
                 dstfile = os.path.join( outdir , plot )
