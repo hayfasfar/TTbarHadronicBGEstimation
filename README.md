@@ -1,7 +1,7 @@
 # **TTbar Hadronic Background Estimation**
 
 ## **Requirements**
-This directory requires the **2DAlphabet** package to run. You can find it [here](<Add link>).
+This directory requires the **2DAlphabet** and **TTbarAllHadUproot** packages to run. You can find instructions to run it [here](https://github.com/b2g-nano/TTbarAllHadUproot/tree/optimize). 
 
 ---
 
@@ -86,3 +86,21 @@ This will perform the fit using different transfer functions. To perform an F-te
 python results_ftest.py
 ```
 All F-test results will be stored in the "ftest_results/" directory.
+
+
+
+## Running all years combined
+
+To run on all years/eras combined, you can go to the directory where your histograms are and execute: 
+
+```
+source rename_all_hists.sh
+source hadd_files.sh
+```
+
+Then you can execute
+
+```
+nohup python ttbar.py --cat cenComb --senario RSGluon --input /afs/cern.ch/user/s/srappocc/TTBarRes/CMSSW_10_6_14/src/TTbarHadronicBGEstimation/files_loosetomedium_Sep24_Comb --signal RSGluon2000 > output1.log 2>&1 &
+nohup python ttbar.py --cat cenFwd --senario RSGluon --input /afs/cern.ch/user/s/srappocc/TTBarRes/CMSSW_10_6_14/src/TTbarHadronicBGEstimation/files_loosetomedium_Sep24_Comb --signal RSGluon2000 > output1.log 2>&1 &
+```
