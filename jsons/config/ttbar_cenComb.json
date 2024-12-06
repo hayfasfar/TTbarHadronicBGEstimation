@@ -169,7 +169,7 @@
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
-            "SCALE": 1.0, 
+            "SCALE": 10.0, 
             "SIGMA": 1.0
         }, 
         "ttag_pt2_Comb": {
@@ -177,7 +177,7 @@
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
-            "SCALE": 1.0, 
+            "SCALE": 10.0, 
             "SIGMA": 1.0
         }, 
         "ttag_pt3_Comb": {
@@ -185,7 +185,7 @@
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
-            "SCALE": 1.0, 
+            "SCALE": 10.0, 
             "SIGMA": 1.0
         }
     }, 
@@ -196,6 +196,8 @@
                 "TITLE": "m_{t} [GeV]", 
                 "BINS": [
                     25, 
+                    50, 
+                    75, 
                     105, 
                     130, 
                     150, 
@@ -205,7 +207,12 @@
                     185, 
                     190, 
                     210, 
-                    475
+                    250, 
+                    300, 
+                    350, 
+                    400, 
+                    450, 
+                    500
                 ], 
                 "SIGSTART": 105, 
                 "SIGEND": 210
