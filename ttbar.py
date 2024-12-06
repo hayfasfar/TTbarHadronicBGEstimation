@@ -70,7 +70,7 @@ def process_signals(signals, study):
     for sig in signals:
       if study == 'all' or study == 'ftest':
         ML_fit(sig)
-        #plot_fit(sig)
+        plot_fit(sig)
       if study =='all' or study =='limit':
         #rint('gain time')
         perform_limit(sig)
