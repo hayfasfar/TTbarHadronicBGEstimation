@@ -15,7 +15,7 @@ parser = argparse.ArgumentParser(description="input to the 2DAlphabet")
 parser.add_argument('--cat', type=str, help="category")
 parser.add_argument('--input', type=str, required=True, help="root files input path.")
 parser.add_argument('--output', type=str, default='output', help="root files input path.")
-parser.add_argument('--senario', choices=['RSGluon', 'ZPrime'], required=True, help='Specify the signal senario to process limits: RSGluon or ZPrime.')
+parser.add_argument('--senario', choices=['RSGluon', 'ZPrime_1','ZPrime_10','ZPrime_30','ZPrime_DM'], required=True, help='Specify the signal senario to process limits: RSGluon or ZPrime.')
 parser.add_argument('--signal', help='Specify a single signal to process (e.g., RSGluon2000).')
 parser.add_argument('--senario_fit', choices=['RSGluon', 'ZPrime'], help='Specify the signal senario to process the fit: RSGluon or ZPrime.')
 parser.add_argument('--tf', type=str, help="TF in case of Ftest study")
@@ -29,9 +29,11 @@ path = args.input
 tf = args.tf
 study = args.study
 output_dir = args.output
-
 json_file='jsons/config/ttbar_'+str(cat)+'.json'
 print ('json_file is', json_file)
+print ('senario is ', senario)
+
+
 
 def load_signals_from_json(json_signals, senario):
     """Load signals from the provided JSON file."""
@@ -70,11 +72,12 @@ def process_signals(signals, study):
     for sig in signals:
       if study == 'all' or study == 'ftest':
         ML_fit(sig)
-        #plot_fit(sig)
+        plot_fit(sig)
       if study =='all' or study =='limit':
-        #rint('gain time')
+        #print('gain time')
         perform_limit(sig)
       if study=='all': 
+        #print('gain time')
         GoF(sig)
 
 
@@ -157,8 +160,24 @@ _rpf_options = {
         'form': '0.1*(@0+@1*x+@2*x*x+@3*x*x*x)*(1+@4*y+@5*y*y+@6*y*y*y)',
         'constraints': _generate_constraints(7)
     },
-    'tf1': {
-        'form': '0.1*(@0+@1*x+@2*x**2+@3*sqrt(x)*log(x))*(1+@4*y+@5*y*y+@6*y*y*y)',
+    '4x4': {
+        'form': '0.1*(@0+@1*x+@2*x*x+@3*x*x*x+ @7*x**4)*(1+@4*y+@5*y*y+@6*y*y*y+@8*y**4)',
+        'constraints': _generate_constraints(7)
+    },
+    '5x5': {
+        'form': '0.1*(@0+@1*x+@2*x*x+@3*x*x*x+ @7*x**4+@9*exp(x)+@10*sqrt(x))*(1+@4*y+@5*y*y+@6*y*y*y+@8*y**4)',
+        'constraints': _generate_constraints(7)
+    },
+    'sqrt': {
+        'form': '0.1*(@0+@1*sqrt(x))*(1+@2*y)',
+        'constraints': _generate_constraints(7)
+    },
+    'sqrtexp': {
+        'form': '0.1*(@0+@1*sqrt(x)+@2*exp(x))*(1+@3*y)',
+        'constraints': _generate_constraints(7)
+    },
+    'sqrtexplog': {
+        'form': '0.1*(@0+@1*sqrt(x)+@2*log(x)+@3*exp(x))*(1+@4*y)',
         'constraints': _generate_constraints(7)
     }
 }
@@ -367,7 +386,7 @@ def perform_limit(signal):
          )
         
         
-def GoF(signal, tf='', nToys=20, condor=False):
+def GoF(signal, tf='', nToys=100, condor=False):
     '''
     Calculates the value of the saturated test statistic in data and compares to the 
     distribution obtained from 500 toys (by default).
