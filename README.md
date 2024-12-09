@@ -30,7 +30,7 @@ Per year
 
 /eos/home-h/hrejebsf/2Dalphabet_files/files_loosetomedium_Sep24
 ```
-Combined run2 BUT central and forward categories seperately :
+Combined run2 :
 ```bash
 /eos/home-h/hrejebsf/2Dalphabet_files/combined_run2_files
 ```
