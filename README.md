@@ -20,6 +20,21 @@ Alternatively, fork the repository first and then clone your fork:
 ```bash
 git clone <your-fork-url>
 ```
+
+## **Samples **
+
+All samples needed for background estimation are located in the following directory: 
+```bash
+
+Per year 
+/eos/home-h/hrejebsf/2Dalphabet_files/files_loosetomedium_Sep24
+
+Combined run2 BUT central and forward categories seperately :
+
+/eos/home-h/hrejebsf/2Dalphabet_files/combined_run2_files
+```
+
+
 ## **Running Fits**
 
 To obtain fit results for both central and forward categories for each year (2016, 2017, and 2018), simply run:
