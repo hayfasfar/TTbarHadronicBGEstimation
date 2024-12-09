@@ -21,7 +21,7 @@ Alternatively, fork the repository first and then clone your fork:
 git clone <your-fork-url>
 ```
 
-## **Samples **
+## **Samples**
 
 All samples needed for background estimation are located in the following directory: 
 
