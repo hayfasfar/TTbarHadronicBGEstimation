@@ -21,9 +21,8 @@ nParams_dict = {
     '1x1': 3,
     '2x1': 4,
     '1x2': 4,
-    '2x2': 4,
+    '2x2': 5,
 }
-
 
 
 def ensure_input_directory(directory):
@@ -192,11 +191,12 @@ def plot_FTest(base_fstat, nRpfs1, nRpfs2, nBins, poly1, poly2, regionby, year):
     c.SaveAs('{}/FTest_{}_{}_{}_{}.png'.format(output,poly1, poly2, year, regionby))
 
 if (len(sys.argv) > 1) :
-    years = sys.argv[1]
+    years = [sys.argv[1]]
 else:
-    years = ['2016','2017','2018']
+    years = ['2016','2017','2018',"Comb"]
 
 output = 'ftest_results'
+
 params_list = [
                 '0x0',
                 '0x1',
@@ -207,7 +207,6 @@ params_list = [
                 '2x1',
                 '2x2'
             ]
-
 if __name__ == "__main__":
   for year in years :
     for region in regions:

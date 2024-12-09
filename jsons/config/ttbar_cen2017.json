@@ -9,16 +9,17 @@
         "HIST_DOWN": "MttvsMt$region$systdown", 
         "path": "/eos/home-h/hrejebsf/2Dalphabet_files/files_loosetomedium_Sep24", 
         "SIGNAME": [
-            "signalZPrime1000_10", 
-            "signalZPrime1500_10", 
-            "signalZPrime2000_10", 
-            "signalZPrime3000_10", 
-            "signalZPrime3500_10", 
-            "signalZPrime4000_10", 
-            "signalZPrime4500_10", 
-            "signalZPrime5000_10", 
-            "signalZPrime6000_10", 
-            "signalZPrime7000_10"
+            "signalRSGluon1000", 
+            "signalRSGluon1500", 
+            "signalRSGluon2000", 
+            "signalRSGluon2500", 
+            "signalRSGluon3000", 
+            "signalRSGluon3500", 
+            "signalRSGluon4000", 
+            "signalRSGluon4500", 
+            "signalRSGluon5000", 
+            "signalRSGluon5500", 
+            "signalRSGluon6000"
         ]
     }, 
     "REGIONS": {
@@ -52,9 +53,9 @@
             "SYSTEMATICS": [
                 "lumi_corr", 
                 "lumi_corr1718", 
-                "lumi17",
-		"prefiring",
-		"pileup", 
+                "lumi17", 
+                "prefiring", 
+                "pileup", 
                 "pdf", 
                 "jes17", 
                 "jer17", 
@@ -75,7 +76,7 @@
                 "lumi_corr1718", 
                 "lumi17", 
                 "ttbar_xsec", 
-		"pileup",
+                "pileup", 
                 "prefiring", 
                 "pdf", 
                 "q2", 
@@ -201,6 +202,7 @@
                 "TITLE": "m_{t} [GeV]", 
                 "BINS": [
                     25, 
+                    60, 
                     105, 
                     130, 
                     150, 
@@ -234,7 +236,6 @@
                     3300, 
                     3500, 
                     3700, 
-                    4100, 
                     6500
                 ]
             }

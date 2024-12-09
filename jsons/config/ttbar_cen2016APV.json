@@ -7,7 +7,7 @@
         "HIST": "MttvsMt$region", 
         "HIST_UP": "MttvsMt$region$systup", 
         "HIST_DOWN": "MttvsMt$region$systdown", 
-        "path": "/eos/home-h/hrejebsf/2Dalphabet_files/files_loosetomedium_Sep24", 
+        "path": "/eos/home-h/hrejebsf/2Dalphabet_files/files_loosetomedium_Dec24_APV", 
         "SIGNAME": [
             "signalRSGluon1000", 
             "signalRSGluon1500", 
@@ -23,17 +23,17 @@
         ]
     }, 
     "REGIONS": {
-        "fwd16Pass": {
+        "cen16APVPass": {
             "PROCESSES": [
-                "16_SIGNAME", 
-                "16_TTbar"
+                "16APV_SIGNAME", 
+                "16APV_TTbar"
             ], 
             "BINNING": "default"
         }, 
-        "fwd16Fail": {
+        "cen16APVFail": {
             "PROCESSES": [
-                "16_SIGNAME", 
-                "16_TTbar"
+                "16APV_SIGNAME", 
+                "16APV_TTbar"
             ], 
             "BINNING": "default"
         }
@@ -46,10 +46,10 @@
             "TYPE": "DATA", 
             "TITLE": "Data", 
             "HELP": "since the data file is not called TTbarAllHaddata_obs.root, we make an alias to the real name - shown below", 
-            "ALIAS": "16_Data", 
+            "ALIAS": "16APV_Data", 
             "LOC": "path/FILE:HIST"
         }, 
-        "16_SIGNAME": {
+        "16APV_SIGNAME": {
             "SYSTEMATICS": [
                 "lumi_corr", 
                 "lumi16", 
@@ -69,7 +69,7 @@
             "TITLE": "g_{RS} (2 TeV)", 
             "LOC": "path/FILE:HIST"
         }, 
-        "16_TTbar": {
+        "16APV_TTbar": {
             "SYSTEMATICS": [
                 "lumi_corr", 
                 "lumi16", 
@@ -84,7 +84,7 @@
                 "ttag_pt2_16", 
                 "ttag_pt3_16"
             ], 
-            "SCALE": 1, 
+            "SCALE": 1.0, 
             "COLOR": 2, 
             "TYPE": "BKG", 
             "TITLE": "t#bar{t}", 
@@ -230,6 +230,7 @@
                     3300, 
                     3500, 
                     3700, 
+                    4100, 
                     6500
                 ]
             }

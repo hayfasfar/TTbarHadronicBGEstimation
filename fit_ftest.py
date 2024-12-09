@@ -10,9 +10,9 @@ import multiprocessing
 
 # Default year is 2016, or use the one passed via command line argument
 if (len(sys.argv) >1):
-    years = sys.argv[1]
+    years = [sys.argv[1]]
 else:
-    years = ['2016','2017','2018']
+    years = ['2016','2017','2018',"Comb"]
 
 # Define regions and parameters
 regions = ['cen', 'fwd']
@@ -33,7 +33,7 @@ def run_fits():
             cmd = (
               "nohup python ttbar.py "
                 "--cat {region}{year} --tf {params} --study ftest --senario RSGluon "
-                "--input /eos/home-h/hrejebsf/2Dalphabet_files/files_loosetomedium_Sep24 "
+                "--input /eos/home-h/hrejebsf/2Dalphabet_files/combined_run2_files/ "
                 "--output {wdir} --signal RSGluon2000 > output{i}.log 2>&1 &"
             ).format(region=region, year=year, params=params, wdir=wdir, i=i)
             

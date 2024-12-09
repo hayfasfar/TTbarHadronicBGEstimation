@@ -7,7 +7,7 @@
         "HIST": "MttvsMt$region", 
         "HIST_UP": "MttvsMt$region$systup", 
         "HIST_DOWN": "MttvsMt$region$systdown", 
-        "path": "/afs/cern.ch/user/s/srappocc/TTBarRes/CMSSW_10_6_14/src/TTbarHadronicBGEstimation/files_loosetomedium_Sep24_Comb", 
+        "path": "/eos/home-h/hrejebsf/2Dalphabet_files/combined_run2_files/", 
         "SIGNAME": [
             "signalRSGluon1000", 
             "signalRSGluon1500", 
@@ -53,15 +53,27 @@
             "SYSTEMATICS": [
                 "lumi_corr", 
                 "lumiComb", 
-                "pileup", 
+                "pileup16", 
+                "pileup17", 
+                "pileup18", 
                 "prefiring", 
                 "pdf", 
-                "jesComb", 
-                "jerComb", 
+                "jes16", 
+                "jes17", 
+                "jes18", 
+                "jer16", 
+                "jer17", 
+                "jer18", 
                 "q2", 
-                "ttag_pt1_Comb", 
-                "ttag_pt2_Comb", 
-                "ttag_pt3_Comb"
+                "ttag_pt1_16", 
+                "ttag_pt1_17", 
+                "ttag_pt1_18", 
+                "ttag_pt2_16", 
+                "ttag_pt2_17", 
+                "ttag_pt2_18", 
+                "ttag_pt3_16", 
+                "ttag_pt3_17", 
+                "ttag_pt3_18"
             ], 
             "SCALE": 1.0, 
             "COLOR": 1, 
@@ -74,15 +86,27 @@
                 "lumi_corr", 
                 "lumiComb", 
                 "ttbar_xsec", 
+                "pileup16", 
+                "pileup17", 
+                "pileup18", 
                 "prefiring", 
-                "pileup", 
                 "pdf", 
+                "jes16", 
+                "jes17", 
+                "jes18", 
+                "jer16", 
+                "jer17", 
+                "jer18", 
                 "q2", 
-                "jesComb", 
-                "jerComb", 
-                "ttag_pt1_Comb", 
-                "ttag_pt2_Comb", 
-                "ttag_pt3_Comb"
+                "ttag_pt1_16", 
+                "ttag_pt1_17", 
+                "ttag_pt1_18", 
+                "ttag_pt2_16", 
+                "ttag_pt2_17", 
+                "ttag_pt2_18", 
+                "ttag_pt3_16", 
+                "ttag_pt3_17", 
+                "ttag_pt3_18"
             ], 
             "SCALE": 1.0, 
             "COLOR": 2, 
@@ -102,14 +126,30 @@
         }, 
         "ttbar_xsec": {
             "CODE": 0, 
-            "VAL": 2.0
+            "VAL": 1.3
         }, 
         "btag_unc": {
             "CODE": 0, 
             "VAL": 1.0
         }, 
-        "pileup": {
-            "ALIAS": "PILEUP", 
+        "pileup16": {
+            "ALIAS": "PILEUP16", 
+            "CODE": 2, 
+            "UP": "path/FILE:HIST_UP", 
+            "DOWN": "path/FILE:HIST_DOWN", 
+            "SCALE": 1.0, 
+            "SIGMA": 1.0
+        }, 
+        "pileup17": {
+            "ALIAS": "PILEUP17", 
+            "CODE": 2, 
+            "UP": "path/FILE:HIST_UP", 
+            "DOWN": "path/FILE:HIST_DOWN", 
+            "SCALE": 1.0, 
+            "SIGMA": 1.0
+        }, 
+        "pileup18": {
+            "ALIAS": "PILEUP18", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
@@ -124,16 +164,48 @@
             "SCALE": 1.0, 
             "SIGMA": 1.0
         }, 
-        "jesComb": {
-            "ALIAS": "JES", 
+        "jes16": {
+            "ALIAS": "JES16", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
             "SCALE": 1.0, 
             "SIGMA": 1.0
         }, 
-        "jerComb": {
-            "ALIAS": "JER", 
+        "jes17": {
+            "ALIAS": "JES17", 
+            "CODE": 2, 
+            "UP": "path/FILE:HIST_UP", 
+            "DOWN": "path/FILE:HIST_DOWN", 
+            "SCALE": 1.0, 
+            "SIGMA": 1.0
+        }, 
+        "jes18": {
+            "ALIAS": "JES18", 
+            "CODE": 2, 
+            "UP": "path/FILE:HIST_UP", 
+            "DOWN": "path/FILE:HIST_DOWN", 
+            "SCALE": 1.0, 
+            "SIGMA": 1.0
+        }, 
+        "jer16": {
+            "ALIAS": "JER16", 
+            "CODE": 2, 
+            "UP": "path/FILE:HIST_UP", 
+            "DOWN": "path/FILE:HIST_DOWN", 
+            "SCALE": 1.0, 
+            "SIGMA": 1.0
+        }, 
+        "jer17": {
+            "ALIAS": "JER17", 
+            "CODE": 2, 
+            "UP": "path/FILE:HIST_UP", 
+            "DOWN": "path/FILE:HIST_DOWN", 
+            "SCALE": 1.0, 
+            "SIGMA": 1.0
+        }, 
+        "jer18": {
+            "ALIAS": "JER18", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
@@ -164,29 +236,77 @@
             "SCALE": 1.0, 
             "SIGMA": 1.0
         }, 
-        "ttag_pt1_Comb": {
-            "ALIAS": "TTAG_PT1", 
+        "ttag_pt1_16": {
+            "ALIAS": "TTAG16_PT1", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
-            "SCALE": 10.0, 
-            "SIGMA": 1.0
+            "SCALE": 1.0, 
+            "SIGMA": 5.0
         }, 
-        "ttag_pt2_Comb": {
-            "ALIAS": "TTAG_PT2", 
+        "ttag_pt1_17": {
+            "ALIAS": "TTAG17_PT1", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
-            "SCALE": 10.0, 
-            "SIGMA": 1.0
+            "SCALE": 1.0, 
+            "SIGMA": 5.0
         }, 
-        "ttag_pt3_Comb": {
-            "ALIAS": "TTAG_PT3", 
+        "ttag_pt1_18": {
+            "ALIAS": "TTAG18_PT1", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
-            "SCALE": 10.0, 
-            "SIGMA": 1.0
+            "SCALE": 1.0, 
+            "SIGMA": 5.0
+        }, 
+        "ttag_pt2_16": {
+            "ALIAS": "TTAG16_PT2", 
+            "CODE": 2, 
+            "UP": "path/FILE:HIST_UP", 
+            "DOWN": "path/FILE:HIST_DOWN", 
+            "SCALE": 1.0, 
+            "SIGMA": 5.0
+        }, 
+        "ttag_pt2_17": {
+            "ALIAS": "TTAG17_PT2", 
+            "CODE": 2, 
+            "UP": "path/FILE:HIST_UP", 
+            "DOWN": "path/FILE:HIST_DOWN", 
+            "SCALE": 1.0, 
+            "SIGMA": 5.0
+        }, 
+        "ttag_pt2_18": {
+            "ALIAS": "TTAG18_PT2", 
+            "CODE": 2, 
+            "UP": "path/FILE:HIST_UP", 
+            "DOWN": "path/FILE:HIST_DOWN", 
+            "SCALE": 1.0, 
+            "SIGMA": 5.0
+        }, 
+        "ttag_pt3_16": {
+            "ALIAS": "TTAG16_PT3", 
+            "CODE": 2, 
+            "UP": "path/FILE:HIST_UP", 
+            "DOWN": "path/FILE:HIST_DOWN", 
+            "SCALE": 1.0, 
+            "SIGMA": 5.0
+        }, 
+        "ttag_pt3_17": {
+            "ALIAS": "TTAG17_PT3", 
+            "CODE": 2, 
+            "UP": "path/FILE:HIST_UP", 
+            "DOWN": "path/FILE:HIST_DOWN", 
+            "SCALE": 1.0, 
+            "SIGMA": 5.0
+        }, 
+        "ttag_pt3_18": {
+            "ALIAS": "TTAG18_PT3", 
+            "CODE": 2, 
+            "UP": "path/FILE:HIST_UP", 
+            "DOWN": "path/FILE:HIST_DOWN", 
+            "SCALE": 1.0, 
+            "SIGMA": 5.0
         }
     }, 
     "BINNING": {
@@ -196,8 +316,10 @@
                 "TITLE": "m_{t} [GeV]", 
                 "BINS": [
                     25, 
-                    50, 
-                    75, 
+                    40, 
+                    55, 
+                    70, 
+                    85, 
                     105, 
                     130, 
                     150, 
@@ -207,11 +329,7 @@
                     185, 
                     190, 
                     210, 
-                    250, 
                     300, 
-                    350, 
-                    400, 
-                    450, 
                     500
                 ], 
                 "SIGSTART": 105, 

@@ -7,7 +7,7 @@
         "HIST": "MttvsMt$region", 
         "HIST_UP": "MttvsMt$region$systup", 
         "HIST_DOWN": "MttvsMt$region$systdown", 
-        "path": "/eos/home-h/hrejebsf/2Dalphabet_files/files_loosetomedium_Sep24", 
+        "path": "/eos/home-h/hrejebsf/2Dalphabet_files/combined_run2_files/", 
         "SIGNAME": [
             "signalRSGluon1000", 
             "signalRSGluon1500", 
@@ -23,17 +23,17 @@
         ]
     }, 
     "REGIONS": {
-        "fwd16Pass": {
+        "fwdCombPass": {
             "PROCESSES": [
-                "16_SIGNAME", 
-                "16_TTbar"
+                "Comb_SIGNAME", 
+                "Comb_TTbar"
             ], 
             "BINNING": "default"
         }, 
-        "fwd16Fail": {
+        "fwdCombFail": {
             "PROCESSES": [
-                "16_SIGNAME", 
-                "16_TTbar"
+                "Comb_SIGNAME", 
+                "Comb_TTbar"
             ], 
             "BINNING": "default"
         }
@@ -46,22 +46,22 @@
             "TYPE": "DATA", 
             "TITLE": "Data", 
             "HELP": "since the data file is not called TTbarAllHaddata_obs.root, we make an alias to the real name - shown below", 
-            "ALIAS": "16_Data", 
+            "ALIAS": "Comb_Data", 
             "LOC": "path/FILE:HIST"
         }, 
-        "16_SIGNAME": {
+        "Comb_SIGNAME": {
             "SYSTEMATICS": [
                 "lumi_corr", 
-                "lumi16", 
+                "lumiComb", 
                 "pileup", 
                 "prefiring", 
                 "pdf", 
-                "jes16", 
-                "jer16", 
+                "jesComb", 
+                "jerComb", 
                 "q2", 
-                "ttag_pt1_16", 
-                "ttag_pt2_16", 
-                "ttag_pt3_16"
+                "ttag_pt1_Comb", 
+                "ttag_pt2_Comb", 
+                "ttag_pt3_Comb"
             ], 
             "SCALE": 1.0, 
             "COLOR": 1, 
@@ -69,20 +69,20 @@
             "TITLE": "g_{RS} (2 TeV)", 
             "LOC": "path/FILE:HIST"
         }, 
-        "16_TTbar": {
+        "Comb_TTbar": {
             "SYSTEMATICS": [
                 "lumi_corr", 
-                "lumi16", 
+                "lumiComb", 
                 "ttbar_xsec", 
                 "prefiring", 
                 "pileup", 
                 "pdf", 
                 "q2", 
-                "jes16", 
-                "jer16", 
-                "ttag_pt1_16", 
-                "ttag_pt2_16", 
-                "ttag_pt3_16"
+                "jesComb", 
+                "jerComb", 
+                "ttag_pt1_Comb", 
+                "ttag_pt2_Comb", 
+                "ttag_pt3_Comb"
             ], 
             "SCALE": 1, 
             "COLOR": 2, 
@@ -96,13 +96,13 @@
             "CODE": 0, 
             "VAL": 1.006
         }, 
-        "lumi16": {
+        "lumiComb": {
             "CODE": 0, 
             "VAL": 1.01
         }, 
         "ttbar_xsec": {
             "CODE": 0, 
-            "VAL": 1.3
+            "VAL": 2.0
         }, 
         "btag_unc": {
             "CODE": 0, 
@@ -124,7 +124,7 @@
             "SCALE": 1.0, 
             "SIGMA": 1.0
         }, 
-        "jes16": {
+        "jesComb": {
             "ALIAS": "JES", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
@@ -132,7 +132,7 @@
             "SCALE": 1.0, 
             "SIGMA": 1.0
         }, 
-        "jer16": {
+        "jerComb": {
             "ALIAS": "JER", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
@@ -164,29 +164,29 @@
             "SCALE": 1.0, 
             "SIGMA": 1.0
         }, 
-        "ttag_pt1_16": {
+        "ttag_pt1_Comb": {
             "ALIAS": "TTAG_PT1", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
-            "SCALE": 1.0, 
-            "SIGMA": 5.0
+            "SCALE": 10.0, 
+            "SIGMA": 1.0
         }, 
-        "ttag_pt2_16": {
+        "ttag_pt2_Comb": {
             "ALIAS": "TTAG_PT2", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
-            "SCALE": 1.0, 
-            "SIGMA": 5.0
+            "SCALE": 10.0, 
+            "SIGMA": 1.0
         }, 
-        "ttag_pt3_16": {
+        "ttag_pt3_Comb": {
             "ALIAS": "TTAG_PT3", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
-            "SCALE": 1.0, 
-            "SIGMA": 5.0
+            "SCALE": 10.0, 
+            "SIGMA": 1.0
         }
     }, 
     "BINNING": {
@@ -196,7 +196,8 @@
                 "TITLE": "m_{t} [GeV]", 
                 "BINS": [
                     25, 
-                    60, 
+                    50, 
+                    75, 
                     105, 
                     130, 
                     150, 
@@ -206,7 +207,12 @@
                     185, 
                     190, 
                     210, 
-                    475
+                    250, 
+                    300, 
+                    350, 
+                    400, 
+                    450, 
+                    500
                 ], 
                 "SIGSTART": 105, 
                 "SIGEND": 210
@@ -230,6 +236,7 @@
                     3300, 
                     3500, 
                     3700, 
+                    4100, 
                     6500
                 ]
             }
@@ -243,6 +250,6 @@
         "plotTitles": false, 
         "plotTemplateComparisons": false, 
         "plotEvtsPerUnit": false, 
-        "year": 16
+        "year": 1
     }
 }
