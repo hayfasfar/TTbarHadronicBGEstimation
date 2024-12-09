@@ -24,13 +24,14 @@ git clone <your-fork-url>
 ## **Samples **
 
 All samples needed for background estimation are located in the following directory: 
-```bash
 
 Per year 
+```bash
+
 /eos/home-h/hrejebsf/2Dalphabet_files/files_loosetomedium_Sep24
-
+```
 Combined run2 BUT central and forward categories seperately :
-
+```bash
 /eos/home-h/hrejebsf/2Dalphabet_files/combined_run2_files
 ```
 
