@@ -62,10 +62,18 @@ Once these cards are combined, you can run the Run-2 combination using:
 ```bash 
 source combined_cards_run2.sh
 ```
-### Goodness of fit (GOF)
+### Goodness of fit (GOF) 
+Blind : 
 
-Coming soon
 
+Unblind: 
+```bash
+text2workspace.py  output/cards_combined_run2/signalRSGluon2000_area/signalRSGluon2000_card_combined.txt  -o workspace.root
+combineTool.py -M GoodnessOfFit -d workspace.root --algo saturated -n unblind  -m 2000 --setParameterRanges r=-5.0,5.0
+combineTool.py -M GoodnessOfFit -d workspace.root --algo saturated -n unblind  -m 2000 --setParameterRanges r=-5.0,5.0 --toysFreq -t 200 -s -1 
+combineTool.py -M CollectGoodnessOfFit --input higgsCombine_unblind.GoodnessOfFit.mH2000.root higgsCombine_unblind.GoodnessOfFit.mH2000.969972814.root -m 2000 -o gof_unblind.json
+plotGof.py gof_unblind.json --statistic saturated --mass 2000.0 -o gof_plot --title-right="Combined run2 unblind"
+```
 ### Fit Diagnostics 
 Run the Fit diagnostics to check the sanity of the fit and systematic uncertainties: you can do it per category, per year or for combined run2:
 Example using combined 2017 i.e central and forward 2017 combined categories: 
