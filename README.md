@@ -72,7 +72,7 @@ Blind :
 1- text2workspace.py  output/cards_combined_run2/signalRSGluon2000_area/signalRSGluon2000_card_combined.txt  -o workspace.root --channel-masks 
 2- combineTool.py -M GoodnessOfFit -d workspace.root --algo saturated -n blind  -m 2000 --setParameterRanges r=-5.0,5.0  --setParameters mask_Name1_Name1_cen16Pass_SIG=1,mask_Name1_Name2_fwd16Pass_SIG=1,mask_Name2_Name1_cen17Pass_SIG=1,mask_Name2_Name2_fwd17Pass_SIG=1,mask_Name3_Name1_cen18Pass_SIG=1,mask_Name3_Name2_fwd18Pass_SIG=1
 3- combineTool.py -M GoodnessOfFit -d workspace.root --algo saturated -n blind  -m 2000 --setParameterRanges r=-5.0,5.0 --toysFreq -t 200 -s -1 --setParameterRanges r=-5.0,5.0  -setParameters mask_Name1_Name1_cen16Pass_SIG=1,mask_Name1_Name2_fwd16Pass_SIG=1,mask_Name2_Name1_cen17Pass_SIG=1,mask_Name2_Name2_fwd17Pass_SIG=1,mask_Name3_Name1_cen18Pass_SIG=1,mask_Name3_Name2_fwd18Pass_SIG=1
-4- combineTool.py -M CollectGoodnessOfFit --input higgsCombine_blind.GoodnessOfFit.mH2000.root higgsCombine_blind.GoodnessOfFit.mH2000.969972814.root -m 2000 -o gof_unblind.json
+4- combineTool.py -M CollectGoodnessOfFit --input higgsCombine_blind.GoodnessOfFit.mH2000.root higgsCombine_blind.GoodnessOfFit.mH2000.969972814.root -m 2000 -o gof_blind.json
 5- plotGof.py gof_blind.json --statistic saturated --mass 2000.0 -o gof_plot_blind_run2 --title-right="Combined run2 blind"
 ```
 
