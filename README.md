@@ -95,7 +95,7 @@ combine -M FitDiagnostics workspace.root -m 1 --rMin -1 --rMax 2 --saveShapes --
 ### Limits 
 To plot limits run the following command: 
 ```bash 
-python plot_limits..py --signal RSGluon --width ""  --output limits --year run2  
+python plot_limits.py --signal RSGluon --width ""  --output limits --year run2  
 ```
 this will plot unblinded limits if you want blind ones you should add the option --blind True 
 
