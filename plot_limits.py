@@ -309,4 +309,4 @@ if __name__ == "__main__":
   Get_limits(tag, signal_mass, signal_names,blind)
   plot_limit(blind) 
 
-### The command to run is : python limit_combined.py --signal RSGluon --width "" --blind False --output limits --year run2  
+### The command to run is : python plot_limits..py --signal RSGluon --width "" --blind False --output limits --year run2  
