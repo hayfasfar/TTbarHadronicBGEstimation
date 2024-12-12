@@ -91,6 +91,14 @@ Example using combined 2017 i.e central and forward 2017 combined categories:
 text2workspace.py  output/cards_combined_17/signalRSGluon2000_area/signalRSGluon2000_card.txt  -o workspace.root
 combine -M FitDiagnostics workspace.root -m 1 --rMin -1 --rMax 2 --saveShapes --saveWithUncertainties -n .combined2017
 ```
+
+### Limits 
+To plot limits run the following command: 
+```bash 
+python plot_limits..py --signal RSGluon --width ""  --output limits --year run2  
+```
+this will plot unblinded limits if you want blind ones you should add the option --blind True 
+
 ### Impact plot
 
 To get Run2 Impact plot run the following command lines, if you want to run it only for one year, consider changing the datacard accordingly. For unblinded Impact remove -t -1 : 
@@ -120,6 +128,9 @@ This will perform the fit using different transfer functions. To perform an F-te
 python results_ftest.py
 ```
 All F-test results will be stored in the "ftest_results/" directory.
+
+
+
 
 
 
