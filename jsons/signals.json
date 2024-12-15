@@ -12,8 +12,52 @@
         "RSGluon5500",
         "RSGluon6000"
     ],
-    "ZPrime": [
-        "ZPrime2000_10"
+    "ZPrime_1": [
+	"ZPrime1000",
+	"ZPrime1600",
+        "ZPrime2000",
+        "ZPrime2500",
+        "ZPrime3000",
+        "ZPrime3500",
+        "ZPrime4000",
+        "ZPrime4500"
+    ],
+    "ZPrime_10": [
+	"ZPrime1000_10",
+	"ZPrime1500_10",
+        "ZPrime2000_10",
+        "ZPrime3000_10",
+        "ZPrime3500_10",
+        "ZPrime4000_10",
+        "ZPrime4500_10",
+        "ZPrime5000_10",
+        "ZPrime6000_10",
+        "ZPrime7000_10"
+    ],
+
+    "ZPrime_30": [
+	"ZPrime1000_30",
+	"ZPrime1600_30",
+        "ZPrime2000_30",
+        "ZPrime2500_30",
+        "ZPrime3000_30",
+        "ZPrime3500_30",
+        "ZPrime4000_30",
+        "ZPrime4500_30",
+        "ZPrime5000_30",
+        "ZPrime6000_30",
+        "ZPrime7000_30"
+    ],
+
+    "ZPrime_DM": [
+	"ZPrime1000_DM",
+	"ZPrime1500_DM",
+        "ZPrime2000_DM",
+        "ZPrime3000_DM",
+        "ZPrime3500_DM",
+        "ZPrime4000_DM",
+        "ZPrime4500_DM",
+        "ZPrime5000_DM"
     ]
 }
 

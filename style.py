@@ -144,7 +144,7 @@ def makeLegend(x1,y1,x2,y2):
     rootObj.append(legend)
     return legend
 
-def makeCMSText(x1,y1,additionalText=None,dx=0.088, size=35):
+def makeCMSText(x1,y1,additionalText=None,dx=0.1, size=35):
     pTextCMS = ROOT.TPaveText(x1,y1,x1,y1,"NDC")
     pTextCMS.AddText("CMS")
     pTextCMS.SetTextFont(63)
