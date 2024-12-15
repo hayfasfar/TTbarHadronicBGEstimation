@@ -34,11 +34,11 @@ def Get_limits(tag, signal_mass, signal_names, blind=False) :
     # Setup call for one of the signal
     this_xsec = signal_xsecs[this_index]
     this_mass = signal_mass[this_index]
-    if "combined" in directory :
+    if "run2" in directory :
       print "it enters the loop"
       this_output = TFile.Open(this_name+'/higgsCombine.Test.AsymptoticLimits.mH120.root')
     else : 
-      this_output = TFile.Open(this_name+'/higgsCombineTest.AsymptoticLimits.mH120.root')
+      this_output = TFile.Open(this_name+'/higgsCombine_combined.AsymptoticLimits.mH120.root')
     if not this_output: continue
     this_tree = this_output.Get('limit')
     
@@ -73,9 +73,8 @@ def Get_limits(tag, signal_mass, signal_names, blind=False) :
         # Observed (plot only if unblinded)
         if this_tree.quantileExpected == -1:
             if  blind == False:
-                print('DEBUG : appending to y_limit')
-                print('appending: {} to y_limit'.format(this_tree.limit*this_xsec))
-                #y_limit.append(this_tree.limit*this_xsec)
+                #print('DEBUG : appending to y_limit')
+                #print('appending: {} to y_limit'.format(this_tree.limit*this_xsec))
                 y_limit.append(this_tree.limit*this_xsec)
             else:
                 y_limit.append(0.0)
@@ -91,10 +90,10 @@ def plot_limit(blind=False):
 
 
  # Expected
- print('---------DEBUG-----------')
- print('x_mass: {}'.format(x_mass))
- print('len x_mass: {}'.format(len(x_mass)))
- print('y_mclimit: {}'.format(y_mclimit))
+ #print('---------DEBUG-----------')
+ #print('x_mass: {}'.format(x_mass))
+ #print('len x_mass: {}'.format(len(x_mass)))
+ #print('y_mclimit: {}'.format(y_mclimit))
  g_mclimit = TGraph(len(x_mass), x_mass, y_mclimit)
  g_mclimit.SetTitle("")
  g_mclimit.SetMarkerStyle(21)
@@ -105,8 +104,8 @@ def plot_limit(blind=False):
  g_mclimit.SetMarkerSize(0.)
 
 
- ymax = 1e5
- ymin = 1e-3
+ ymax = 1e3
+ ymin = 1e-4
 
  xmin = signal_mass[0]
  xmax = signal_mass[-1]
@@ -118,10 +117,11 @@ def plot_limit(blind=False):
  # Observed
  if  blind == False:
     print 'Not blinded'
-    print('---------------DEBUG---------------------')
-    print('x_mass: {}'.format(x_mass))
-    print('len x_mass: {}'.format(len(x_mass)))
-    print('y_limit: {}'.format(y_limit))
+    print ("it enters where you want")
+    #print('---------------DEBUG---------------------')
+    #print('x_mass: {}'.format(x_mass))
+    #print('len x_mass: {}'.format(len(x_mass)))
+    #print('y_limit: {}'.format(y_limit))
     g_limit = TGraph(len(x_mass), x_mass, y_limit)
     g_limit.SetTitle("")
     g_limit.SetMarkerStyle(7)
@@ -134,10 +134,9 @@ def plot_limit(blind=False):
     #g_limit.SetMinimum(0.3e-2) #0.005
     g_limit.SetMaximum(ymax)
     g_limit.SetMinimum(ymin)
+
  else:
     print 'Blinded'
-    g_mclimit.GetXaxis().SetTitle("m_{"+signal_string[signal]+" [TeV]")  # NOT GENERIC
-    g_mclimit.GetYaxis().SetTitle("#sigma_{"+signal_string[signal]+" #times B("+signal_string[signal]+" #rightarrow t #bar{t}) [pb]") # NOT GENERIC
     g_mclimit.GetYaxis().SetRangeUser(0., 80.)
     g_mclimit.GetXaxis().SetRangeUser(xmin, xmax)
     #g_mclimit.SetMinimum(0.3e-2) #0.005
@@ -172,12 +171,12 @@ def plot_limit(blind=False):
 
  # 2 sigma expected
  g_error95 = make_smooth_graph(g_mc2minus, g_mc2plus)
- g_error95.SetFillColor(kOrange)
+ g_error95.SetFillColor(TColor.GetColor("F5BB54"))
  g_error95.SetLineColor(0)
 
  # 1 sigma expected
  g_error = make_smooth_graph(g_mcminus, g_mcplus)
- g_error.SetFillColor( kGreen+1)
+ g_error.SetFillColor(TColor.GetColor("607641"))
  g_error.SetLineColor(0)
 
  # Finally calculate the intercept
@@ -191,8 +190,7 @@ def plot_limit(blind=False):
  if not blind:
     g_limit.GetXaxis().SetTitle("m_{"+signal_string[signal]+"} [TeV]")  # NOT GENERIC
     g_limit.GetYaxis().SetTitle("#sigma_{"+signal_string[signal]+"} #times B("+signal_string[signal]+" #rightarrow t #bar{t}) [pb]") # NOT GENERIC
-    g_limit.GetXaxis().SetTitleSize(0.055)
-    g_limit.GetYaxis().SetTitleSize(0.05)
+
     g_limit.Draw('ap')
     g_error95.Draw(fillstyle)
     g_error.Draw(fillstyle)
@@ -200,8 +198,8 @@ def plot_limit(blind=False):
     g_limit.Draw("SAME")
 
     graphWP.Draw(linestyle)
-    g_limit.GetYaxis().SetTitleOffset(1.5)
-    g_limit.GetXaxis().SetTitleOffset(1.25)
+    g_limit.GetYaxis().SetTitleOffset(1.3)
+    g_limit.GetXaxis().SetTitleOffset(1.15)
 
  else:
     g_mclimit.GetXaxis().SetTitle("m_{"+signal_string[signal]+"} [TeV]")  # NOT GENERIC
@@ -215,12 +213,10 @@ def plot_limit(blind=False):
     graphWP.Draw(linestyle)
     g_mclimit.GetYaxis().SetTitleOffset(1.5)
     g_mclimit.GetXaxis().SetTitleOffset(1.25)
+    g_mclimit.GetXaxis().SetTitle("m_{"+signal_string[signal]+" [TeV]")  # NOT GENERIC
+    g_mclimit.GetYaxis().SetTitle("#sigma_{"+signal_string[signal]+" #times B("+signal_string[signal]+" #rightarrow t #bar{t}) [pb]") # NOT GENERIC
     
  # graphWP.Draw("c")
-
-
-
-
 
 
 
@@ -251,8 +247,8 @@ def plot_limit(blind=False):
  # Legend and draw
 
 
- makeLumiText(0.9, 0.96, year=year, lumi=lumi[year])
- makeCMSText(0.20, 0.90, additionalText=" Preliminary")
+ makeLumiText(0.9, 0.93, year=year, lumi=lumi[year])
+ makeCMSText(0.2, 0.85, additionalText=" Preliminary")
  gStyle.SetLegendFont(42)
  legend = TLegend(0.60, 0.60, 0.91, 0.87, '')
  legend.SetHeader("95% CL upper limits")
@@ -300,12 +296,13 @@ if __name__ == "__main__":
   theory_xsecs = signal_df[signal]['theory']
   signal_xsecs = signal_df[signal]['expected']
   lumi = {"16": 36, "17": 41.5, "18": 60, "run2": 138}
-  signal_string = {"RSGluon": "g_{KK}" , "ZPrime":"Z^{'}", "ZPrime_DM": "Z^{'}_{DM}"}
+  signal_string = {"RSGluon": "g_{KK}" , "ZPrime":"Z'", "ZPrime_DM": "Z_{DM}"}
   legend_string = {"" :"", "1" : "1% Width", "10":"10% Width" , "30":"30% Width", "DM":"" }
-  if width != "" : tag == "_"+width
+  if width != "" : tag = "_"+width
+  elif width == "1" : tag ="" 
   else : tag = ""
   signal_names = [directory + '/signal' + signal + str(int(s*1000)) + tag + '_area' for s in signal_mass]
-  print("weird definition of signal names ", signal_names)
+  print("signal names are ", signal_names)
   Get_limits(tag, signal_mass, signal_names,blind)
   plot_limit(blind) 
 
