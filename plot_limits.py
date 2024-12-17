@@ -5,7 +5,7 @@ from  array import array
 import numpy as np
 import json
 import ROOT
-from ROOT import TGraph, TLatex, TFile, TLine, TLegend, TCanvas, kOrange, kGreen, kTRUE, gStyle, gROOT
+from ROOT import TGraph, TLatex, TFile, TLine, TColor, TLegend, TCanvas, kOrange, kGreen, kTRUE, gStyle, gROOT
 import header
 from header import WaitForJobs, make_smooth_graph, Inter
 from style import * 
@@ -104,7 +104,7 @@ def plot_limit(blind=False):
  g_mclimit.SetMarkerSize(0.)
 
 
- ymax = 1e3
+ ymax = 1e4
  ymin = 1e-4
 
  xmin = signal_mass[0]
@@ -163,20 +163,19 @@ def plot_limit(blind=False):
  graphWP.SetMinimum(0.3e-2) #0.005
  graphWP.SetMaximum(ymax)
  for index,mass in enumerate(signal_mass):
-    xsec = theory_xsecs[index]
+    xsec = theory_xsecs[index] * 1.3 ##k factor.
     graphWP.SetPoint(index,    mass,   xsec    )
-
  graphWP.SetLineWidth(3)
  graphWP.SetLineColor(4)
 
  # 2 sigma expected
  g_error95 = make_smooth_graph(g_mc2minus, g_mc2plus)
- g_error95.SetFillColor(TColor.GetColor("F5BB54"))
+ g_error95.SetFillColor(TColor.GetColor("#F5BB54"))
  g_error95.SetLineColor(0)
 
  # 1 sigma expected
  g_error = make_smooth_graph(g_mcminus, g_mcplus)
- g_error.SetFillColor(TColor.GetColor("607641"))
+ g_error.SetFillColor(TColor.GetColor("#607641"))
  g_error.SetLineColor(0)
 
  # Finally calculate the intercept
@@ -196,7 +195,6 @@ def plot_limit(blind=False):
     g_error.Draw(fillstyle)
     g_mclimit.Draw("SAME")
     g_limit.Draw("SAME")
-
     graphWP.Draw(linestyle)
     g_limit.GetYaxis().SetTitleOffset(1.3)
     g_limit.GetXaxis().SetTitleOffset(1.15)
@@ -215,7 +213,7 @@ def plot_limit(blind=False):
     g_mclimit.GetXaxis().SetTitleOffset(1.25)
     g_mclimit.GetXaxis().SetTitle("m_{"+signal_string[signal]+" [TeV]")  # NOT GENERIC
     g_mclimit.GetYaxis().SetTitle("#sigma_{"+signal_string[signal]+" #times B("+signal_string[signal]+" #rightarrow t #bar{t}) [pb]") # NOT GENERIC
-    
+        
  # graphWP.Draw("c")
 
 
@@ -264,7 +262,7 @@ def plot_limit(blind=False):
  legend.SetLineColor(0)
  legend.Draw("same")
  climits.RedrawAxis()
- savefilename = output+'/limits'+'_' + signal + '_' + year +str(blind)+'.pdf'
+ savefilename = output+'/limits'+'_' + signal +width+"_" + year +str(blind)+'.pdf'
 
  climits.SaveAs(savefilename)
  climits.SaveAs(savefilename.replace('pdf', 'png'))
@@ -292,15 +290,15 @@ if __name__ == "__main__":
   signal_df = json.load(open('jsons/signal_xs.json'))
   directory = 'output/cards_combined_'+year
   print directory
-  signal_mass  = signal_df[signal]['mass']
-  theory_xsecs = signal_df[signal]['theory']
-  signal_xsecs = signal_df[signal]['expected']
+  signal_mass  = signal_df[signal+width]['mass']
+  theory_xsecs = signal_df[signal+width]['theory']
+  signal_xsecs = signal_df[signal+width]['expected']
   lumi = {"16": 36, "17": 41.5, "18": 60, "run2": 138}
   signal_string = {"RSGluon": "g_{KK}" , "ZPrime":"Z'", "ZPrime_DM": "Z_{DM}"}
   legend_string = {"" :"", "1" : "1% Width", "10":"10% Width" , "30":"30% Width", "DM":"" }
   if width != "" : tag = "_"+width
-  elif width == "1" : tag ="" 
   else : tag = ""
+  if width == "1" : tag ="" 
   signal_names = [directory + '/signal' + signal + str(int(s*1000)) + tag + '_area' for s in signal_mass]
   print("signal names are ", signal_names)
   Get_limits(tag, signal_mass, signal_names,blind)
