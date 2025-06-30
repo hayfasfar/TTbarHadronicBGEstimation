@@ -63,7 +63,7 @@
                 "ttag_pt2_16", 
                 "ttag_pt3_16"
             ], 
-            "SCALE": 1.0, 
+            "SCALE": 0.1, 
             "COLOR": 1, 
             "TYPE": "SIGNAL", 
             "TITLE": "g_{RS} (2 TeV)", 
@@ -102,7 +102,7 @@
         }, 
         "ttbar_xsec": {
             "CODE": 0, 
-            "VAL": 1.3
+            "VAL": 1.2
         }, 
         "btag_unc": {
             "CODE": 0, 

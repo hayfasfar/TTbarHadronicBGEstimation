@@ -52,10 +52,9 @@
         "17_SIGNAME": {
             "SYSTEMATICS": [
                 "lumi_corr", 
-                "lumi_corr1718", 
                 "lumi17", 
-                "prefiring", 
                 "pileup", 
+                "prefiring", 
                 "pdf", 
                 "jes17", 
                 "jer17", 
@@ -64,7 +63,7 @@
                 "ttag_pt2_17", 
                 "ttag_pt3_17"
             ], 
-            "SCALE": 1.0, 
+            "SCALE": 0.1, 
             "COLOR": 1, 
             "TYPE": "SIGNAL", 
             "TITLE": "g_{RS} (2 TeV)", 
@@ -73,15 +72,14 @@
         "17_TTbar": {
             "SYSTEMATICS": [
                 "lumi_corr", 
-                "lumi_corr1718", 
                 "lumi17", 
-                "ttbar_xsec", 
                 "pileup", 
                 "prefiring", 
                 "pdf", 
-                "q2", 
                 "jes17", 
                 "jer17", 
+                "q2", 
+                "ttbar_xsec", 
                 "ttag_pt1_17", 
                 "ttag_pt2_17", 
                 "ttag_pt3_17"

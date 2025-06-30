@@ -7,7 +7,7 @@
         "HIST": "MttvsMt$region", 
         "HIST_UP": "MttvsMt$region$systup", 
         "HIST_DOWN": "MttvsMt$region$systdown", 
-        "path": "/eos/home-h/hrejebsf/2Dalphabet_files/combined_run2_files/", 
+        "path": "/eos/home-h/hrejebsf/2Dalphabet_files/combined_run2_files", 
         "SIGNAME": [
             "signalRSGluon1000", 
             "signalRSGluon1500", 
@@ -133,7 +133,7 @@
             "VAL": 1.0
         }, 
         "pileup16": {
-            "ALIAS": "PILEUP16", 
+            "ALIAS": "16PILEUP", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
@@ -141,7 +141,7 @@
             "SIGMA": 1.0
         }, 
         "pileup17": {
-            "ALIAS": "PILEUP17", 
+            "ALIAS": "17PILEUP", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
@@ -149,7 +149,7 @@
             "SIGMA": 1.0
         }, 
         "pileup18": {
-            "ALIAS": "PILEUP18", 
+            "ALIAS": "18PILEUP", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
@@ -165,7 +165,7 @@
             "SIGMA": 1.0
         }, 
         "jes16": {
-            "ALIAS": "JES16", 
+            "ALIAS": "16JES", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
@@ -173,7 +173,7 @@
             "SIGMA": 1.0
         }, 
         "jes17": {
-            "ALIAS": "JES17", 
+            "ALIAS": "17JES", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
@@ -181,7 +181,7 @@
             "SIGMA": 1.0
         }, 
         "jes18": {
-            "ALIAS": "JES18", 
+            "ALIAS": "18JES", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
@@ -189,7 +189,7 @@
             "SIGMA": 1.0
         }, 
         "jer16": {
-            "ALIAS": "JER16", 
+            "ALIAS": "16JER", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
@@ -197,7 +197,7 @@
             "SIGMA": 1.0
         }, 
         "jer17": {
-            "ALIAS": "JER17", 
+            "ALIAS": "17JER", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
@@ -205,7 +205,7 @@
             "SIGMA": 1.0
         }, 
         "jer18": {
-            "ALIAS": "JER18", 
+            "ALIAS": "18JER", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
@@ -237,7 +237,7 @@
             "SIGMA": 1.0
         }, 
         "ttag_pt1_16": {
-            "ALIAS": "TTAG16_PT1", 
+            "ALIAS": "16TTAG_PT1", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
@@ -245,7 +245,7 @@
             "SIGMA": 5.0
         }, 
         "ttag_pt1_17": {
-            "ALIAS": "TTAG17_PT1", 
+            "ALIAS": "17TTAG_PT1", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
@@ -253,7 +253,7 @@
             "SIGMA": 5.0
         }, 
         "ttag_pt1_18": {
-            "ALIAS": "TTAG18_PT1", 
+            "ALIAS": "18TTAG_PT1", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
@@ -261,7 +261,7 @@
             "SIGMA": 5.0
         }, 
         "ttag_pt2_16": {
-            "ALIAS": "TTAG16_PT2", 
+            "ALIAS": "16TTAG_PT2", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
@@ -269,7 +269,7 @@
             "SIGMA": 5.0
         }, 
         "ttag_pt2_17": {
-            "ALIAS": "TTAG17_PT2", 
+            "ALIAS": "17TTAG_PT2", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
@@ -277,7 +277,7 @@
             "SIGMA": 5.0
         }, 
         "ttag_pt2_18": {
-            "ALIAS": "TTAG18_PT2", 
+            "ALIAS": "18TTAG_PT2", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
@@ -285,7 +285,7 @@
             "SIGMA": 5.0
         }, 
         "ttag_pt3_16": {
-            "ALIAS": "TTAG16_PT3", 
+            "ALIAS": "16TTAG_PT3", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
@@ -293,7 +293,7 @@
             "SIGMA": 5.0
         }, 
         "ttag_pt3_17": {
-            "ALIAS": "TTAG17_PT3", 
+            "ALIAS": "17TTAG_PT3", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
@@ -301,7 +301,7 @@
             "SIGMA": 5.0
         }, 
         "ttag_pt3_18": {
-            "ALIAS": "TTAG18_PT3", 
+            "ALIAS": "18TTAG_PT3", 
             "CODE": 2, 
             "UP": "path/FILE:HIST_UP", 
             "DOWN": "path/FILE:HIST_DOWN", 
