@@ -42,7 +42,7 @@
         "data_obs": {
             "SYSTEMATICS": [], 
             "SCALE": 1.0, 
-            "COLOR": 1, 
+            "COLOR": "black", 
             "TYPE": "DATA", 
             "TITLE": "Data", 
             "HELP": "since the data file is not called TTbarAllHaddata_obs.root, we make an alias to the real name - shown below", 
@@ -76,7 +76,7 @@
                 "ttag_pt3_18"
             ], 
             "SCALE": 1.0, 
-            "COLOR": 1, 
+            "COLOR": "black", 
             "TYPE": "SIGNAL", 
             "TITLE": "g_{RS} (2 TeV)", 
             "LOC": "path/FILE:HIST"
@@ -109,7 +109,7 @@
                 "ttag_pt3_18"
             ], 
             "SCALE": 1.0, 
-            "COLOR": 2, 
+            "COLOR": "red", 
             "TYPE": "BKG", 
             "TITLE": "t#bar{t}", 
             "LOC": "path/FILE:HIST"
