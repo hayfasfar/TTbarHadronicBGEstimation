@@ -1,0 +1,129 @@
+{
+    "NAME": "ttbar",
+    "GLOBAL": {
+        "FILE": "TTbarAllHad$process.root",
+        "FILE_UP": "TTbarAllHad$process_$syst_up.root",
+        "FILE_DOWN": "TTbarAllHad$process_$syst_down.root",
+        "HIST": "MttvsMt$region",
+        "HIST_UP": "MttvsMt$region$systup",
+        "HIST_DOWN": "MttvsMt$region$systdown",
+        "path": "root://eosuser.cern.ch//eos/user/a/amandal/ttbarhad_root_files/2dAlphabetInputs",
+        "SIGNAME": [
+            "signalRSGluon4000"
+        ]
+    },
+    "REGIONS": {
+        "Cen2024Pass": {
+            "PROCESSES": [
+                "24_SIGNAME",
+                "24_TTbar"
+            ],
+            "BINNING": "default"
+        },
+        "Cen2024Fail": {
+            "PROCESSES": [
+                "24_SIGNAME",
+                "24_TTbar"
+            ],
+            "BINNING": "default"
+        }
+    },
+    "PROCESSES": {
+        "data_obs": {
+            "SYSTEMATICS": [],
+            "SCALE": 1.0,
+            "COLOR": "black",
+            "TYPE": "DATA",
+            "TITLE": "Data",
+            "ALIAS": "24_Data",
+            "LOC": "path/FILE:HIST"
+        },
+        "24_SIGNAME": {
+            "SYSTEMATICS": [
+                "lumi24"
+            ],
+            "SCALE": 0.1,
+            "COLOR": "black",
+            "TYPE": "SIGNAL",
+            "TITLE": "g_{RS} (2 TeV)",
+            "LOC": "path/FILE:HIST"
+        },
+        "24_TTbar": {
+            "SYSTEMATICS": [
+                "lumi24",
+                "ttbar_xsec"
+            ],
+            "SCALE": 1.0,
+            "COLOR": "red",
+            "TYPE": "BKG",
+            "TITLE": "t#bar{t}",
+            "LOC": "path/FILE:HIST"
+        }
+    },
+    "SYSTEMATICS": {
+        "lumi24": {
+            "CODE": 0,
+            "VAL": 1.02
+        },
+        "ttbar_xsec": {
+            "CODE": 0,
+            "VAL": 1.2
+        }
+    },
+    "BINNING": {
+        "default": {
+            "X": {
+                "NAME": "jetmass",
+                "TITLE": "m_{t} [GeV]",
+                "BINS": [
+                    25,
+                    60,
+                    105,
+                    130,
+                    150,
+                    170,
+                    175,
+                    180,
+                    185,
+                    190,
+                    210,
+                    475
+                ],
+                "SIGSTART": 105,
+                "SIGEND": 210
+            },
+            "Y": {
+                "NAME": "resmass",
+                "TITLE": "m_{t#bar{t}} [GeV]",
+                "BINS": [
+                    800,
+                    1100,
+                    1300,
+                    1500,
+                    1700,
+                    1900,
+                    2100,
+                    2300,
+                    2500,
+                    2700,
+                    2900,
+                    3100,
+                    3300,
+                    3500,
+                    3700,
+                    6500
+                ]
+            }
+        }
+    },
+    "OPTIONS": {
+        "blindedPlots": [],
+        "blindedFit": [],
+        "plotPrefitSigInFitB": true,
+        "plotUncerts": false,
+        "plotTitles": false,
+        "plotTemplateComparisons": false,
+        "plotEvtsPerUnit": false,
+        "year": 24
+    }
+}

@@ -82,7 +82,7 @@ def normalize_process_colors(config):
         process['COLOR'] = ROOT_COLOR_NAMES.get(color_code, 'black')
 
 
-signals = load_signals_from_json('jsons/signals.json', senario)
+signals = [signal_name(args.signal)] if args.signal else load_signals_from_json('jsons/signals.json', senario)
 
 
 with open(json_file, 'r') as file:
