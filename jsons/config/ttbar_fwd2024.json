@@ -7,7 +7,7 @@
         "HIST": "MttvsMt$region",
         "HIST_UP": "MttvsMt$region$systup",
         "HIST_DOWN": "MttvsMt$region$systdown",
-        "path": "root://eosuser.cern.ch//eos/user/a/amandal/ttbarhad_root_files/2dAlphabetInputs",
+        "path": "/eos/user/a/amandal/ttbarhad_root_files/2dAlphabetInputs",
         "SIGNAME": [
             "signalRSGluon4000"
         ]
@@ -40,9 +40,15 @@
         },
         "24_SIGNAME": {
             "SYSTEMATICS": [
-                "lumi24"
+                "lumi24",
+                "pileup24",
+                "pdf24",
+                "jes24",
+                "jer24",
+                "q2_24",
+                "ttag_pt1_24"
             ],
-            "SCALE": 0.1,
+            "SCALE": 0.01,
             "COLOR": "black",
             "TYPE": "SIGNAL",
             "TITLE": "g_{RS} (2 TeV)",
@@ -51,7 +57,13 @@
         "24_TTbar": {
             "SYSTEMATICS": [
                 "lumi24",
-                "ttbar_xsec"
+                "ttbar_xsec",
+                "pileup24",
+                "pdf24",
+                "jes24",
+                "jer24",
+                "q2_24",
+                "ttag_pt1_24"
             ],
             "SCALE": 1.0,
             "COLOR": "red",
@@ -68,6 +80,54 @@
         "ttbar_xsec": {
             "CODE": 0,
             "VAL": 1.2
+        },
+        "pileup24": {
+            "ALIAS": "PILEUP",
+            "CODE": 2,
+            "UP": "path/FILE:HIST_UP",
+            "DOWN": "path/FILE:HIST_DOWN",
+            "SCALE": 1.0,
+            "SIGMA": 1.0
+        },
+        "pdf24": {
+            "ALIAS": "PDF",
+            "CODE": 2,
+            "UP": "path/FILE:HIST_UP",
+            "DOWN": "path/FILE:HIST_DOWN",
+            "SCALE": 1.0,
+            "SIGMA": 1.0
+        },
+        "jes24": {
+            "ALIAS": "JES",
+            "CODE": 2,
+            "UP": "path/FILE:HIST_UP",
+            "DOWN": "path/FILE:HIST_DOWN",
+            "SCALE": 1.0,
+            "SIGMA": 1.0
+        },
+        "jer24": {
+            "ALIAS": "JER",
+            "CODE": 2,
+            "UP": "path/FILE:HIST_UP",
+            "DOWN": "path/FILE:HIST_DOWN",
+            "SCALE": 1.0,
+            "SIGMA": 1.0
+        },
+        "q2_24": {
+            "ALIAS": "Q2",
+            "CODE": 2,
+            "UP": "path/FILE:HIST_UP",
+            "DOWN": "path/FILE:HIST_DOWN",
+            "SCALE": 1.0,
+            "SIGMA": 1.0
+        },
+        "ttag_pt1_24": {
+            "ALIAS": "TTAG_PT1",
+            "CODE": 2,
+            "UP": "path/FILE:HIST_UP",
+            "DOWN": "path/FILE:HIST_DOWN",
+            "SCALE": 1.0,
+            "SIGMA": 5.0
         }
     },
     "BINNING": {
@@ -117,12 +177,16 @@
         }
     },
     "OPTIONS": {
-        "blindedPlots": [],
-        "blindedFit": [],
+        "blindedPlots": [
+            "Fwd2024Pass"
+        ],
+        "blindedFit": [
+            "Fwd2024Pass"
+        ],
         "plotPrefitSigInFitB": true,
         "plotUncerts": false,
         "plotTitles": false,
-        "plotTemplateComparisons": false,
+        "plotTemplateComparisons": true,
         "plotEvtsPerUnit": false,
         "year": 24
     }

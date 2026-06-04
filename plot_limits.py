@@ -2,6 +2,8 @@ from optparse import OptionParser
 import subprocess
 import array
 from  array import array
+import glob
+import os
 import numpy as np
 import json
 import ROOT
@@ -34,13 +36,25 @@ def Get_limits(tag, signal_mass, signal_names, blind=False) :
     # Setup call for one of the signal
     this_xsec = signal_xsecs[this_index]
     this_mass = signal_mass[this_index]
-    if "run2" in directory :
-      print "it enters the loop"
-      this_output = TFile.Open(this_name+'/higgsCombine.Test.AsymptoticLimits.mH120.root')
-    else : 
-      this_output = TFile.Open(this_name+'/higgsCombine_combined.AsymptoticLimits.mH120.root')
-    if not this_output: continue
+    output_candidates = [
+      this_name+'/higgsCombine_combined.AsymptoticLimits.mH120.root',
+      this_name+'/higgsCombine.Test.AsymptoticLimits.mH120.root',
+    ]
+    output_candidates.extend(sorted(glob.glob(this_name+'/higgsCombine*.AsymptoticLimits*.root')))
+    output_candidates = [path for i, path in enumerate(output_candidates) if path not in output_candidates[:i]]
+    existing_outputs = [path for path in output_candidates if os.path.exists(path)]
+    if not existing_outputs:
+      print("No AsymptoticLimits output found under " + this_name + "; skipping")
+      continue
+
+    this_output = TFile.Open(existing_outputs[0])
+    if not this_output:
+      print("Could not open " + existing_outputs[0] + "; skipping")
+      continue
     this_tree = this_output.Get('limit')
+    if not this_tree:
+      print("No limit tree found in " + existing_outputs[0] + "; skipping")
+      continue
     
     this_xsec = this_xsec
     
@@ -80,6 +94,9 @@ def Get_limits(tag, signal_mass, signal_names, blind=False) :
                 y_limit.append(0.0)
 
 def plot_limit(blind=False):
+ if len(x_mass) == 0:
+    raise RuntimeError("No limit points were found. Run AsymptoticLimits first, then rerun plot_limits.py.")
+ os.makedirs(output, exist_ok=True)
  # Make Canvas and TGraphs (mostly stolen from other code that formats well)
  climits = TCanvas("climits", "climits",700, 600)
  climits.SetLogy(True)
@@ -116,7 +133,7 @@ def plot_limit(blind=False):
 
  # Observed
  if  blind == False:
-    print 'Not blinded'
+    print('Not blinded')
     print ("it enters where you want")
     #print('---------------DEBUG---------------------')
     #print('x_mass: {}'.format(x_mass))
@@ -136,7 +153,7 @@ def plot_limit(blind=False):
     g_limit.SetMinimum(ymin)
 
  else:
-    print 'Blinded'
+    print('Blinded')
     g_mclimit.GetYaxis().SetRangeUser(0., 80.)
     g_mclimit.GetXaxis().SetRangeUser(xmin, xmax)
     #g_mclimit.SetMinimum(0.3e-2) #0.005
@@ -183,8 +200,8 @@ def plot_limit(blind=False):
  upLimit,trash = Inter(g_mcminus,graphWP) if len(Inter(g_mcminus,graphWP)) > 0 else -1.0
  lowLimit,trash = Inter(g_mcplus,graphWP) if len(Inter(g_mcplus,graphWP)) > 0 else -1.0
 
- print 'expectedMassLimit', expectedMassLimit
- print 'expectedCrossLimit', expectedCrossLimit
+ print('expectedMassLimit', expectedMassLimit)
+ print('expectedCrossLimit', expectedCrossLimit)
 
  if not blind:
     g_limit.GetXaxis().SetTitle("m_{"+signal_string[signal]+"} [TeV]")  # NOT GENERIC
@@ -211,8 +228,8 @@ def plot_limit(blind=False):
     graphWP.Draw(linestyle)
     g_mclimit.GetYaxis().SetTitleOffset(1.5)
     g_mclimit.GetXaxis().SetTitleOffset(1.25)
-    g_mclimit.GetXaxis().SetTitle("m_{"+signal_string[signal]+" [TeV]")  # NOT GENERIC
-    g_mclimit.GetYaxis().SetTitle("#sigma_{"+signal_string[signal]+" #times B("+signal_string[signal]+" #rightarrow t #bar{t}) [pb]") # NOT GENERIC
+    g_mclimit.GetXaxis().SetTitle("m_{"+signal_string[signal]+"} [TeV]")  # NOT GENERIC
+    g_mclimit.GetYaxis().SetTitle("#sigma_{"+signal_string[signal]+"} #times B("+signal_string[signal]+" #rightarrow t #bar{t}) [pb]") # NOT GENERIC
         
  # graphWP.Draw("c")
 
@@ -224,10 +241,10 @@ def plot_limit(blind=False):
     expLineLabel.AddText(str(int(expectedMassLimit))+' TeV')
     expLineLabel.Draw()
 
- print 'Expected limit: '+str(expectedMassLimit) + ' +'+str(upLimit-expectedMassLimit) +' -'+str(expectedMassLimit-lowLimit) + ' TeV' # NOT GENERIC
+ print('Expected limit: '+str(expectedMassLimit) + ' +'+str(upLimit-expectedMassLimit) +' -'+str(expectedMassLimit-lowLimit) + ' TeV') # NOT GENERIC
  if not blind:
     obsMassLimit,obsCrossLimit = Inter(g_limit,graphWP) if len(Inter(g_limit,graphWP)) > 0 else -1.0
-    print 'Observed limit: '+str(obsMassLimit) + ' TeV'
+    print('Observed limit: '+str(obsMassLimit) + ' TeV')
 
     obsLine = TLine(obsMassLimit,g_mclimit.GetMinimum(),obsMassLimit,obsCrossLimit)
     obsLine.SetLineStyle(2)
@@ -266,8 +283,8 @@ def plot_limit(blind=False):
 
  climits.SaveAs(savefilename)
  climits.SaveAs(savefilename.replace('pdf', 'png'))
- print 'saving ' + savefilename
- print 'saving ' + savefilename.replace('pdf', 'png')
+ print('saving ' + savefilename)
+ print('saving ' + savefilename.replace('pdf', 'png'))
 
 drawIntersection = False
 
@@ -275,25 +292,26 @@ drawIntersection = False
 #directory where signal directories are located
 if __name__ == "__main__":    
   parser = argparse.ArgumentParser(description="input to plotting limits")
-  parser.add_argument('--year', type=str,choices=["16","17","18","run2"], default="run2", help="plot limits for single year or combined run2")
+  parser.add_argument('--year', type=str,choices=["16","17","18","run2","24","2024"], default="run2", help="plot limits for single year, 2024, or combined run2")
   parser.add_argument('--output', type=str, default='limits', help="output directory")
   parser.add_argument('--signal', choices=["RSGluon","ZPrime","ZPrime_DM"], help='Specify signal scenario to plot')
   parser.add_argument('--width', choices=["1","10","30","DM",""] ,help='Specify width of signal to plot')
-  parser.add_argument('--blind',default=False, help='Specify signal scenario to plot')
+  parser.add_argument('--blind',default=False, help='Use expected-only/blinded plotting. Accepts True/False.')
   args = parser.parse_args()
   year = args.year 
   width=args.width
   signal=args.signal
   output=args.output
-  blind=args.blind
+  blind=str(args.blind).lower() in ("true", "1", "yes")
   
   signal_df = json.load(open('jsons/signal_xs.json'))
-  directory = 'output/cards_combined_'+year
-  print directory
+  directory_year = "24" if year == "2024" else year
+  directory = 'output/cards_combined_'+directory_year
+  print(directory)
   signal_mass  = signal_df[signal+width]['mass']
   theory_xsecs = signal_df[signal+width]['theory']
   signal_xsecs = signal_df[signal+width]['expected']
-  lumi = {"16": 36, "17": 41.5, "18": 60, "run2": 138}
+  lumi = {"16": 36, "17": 41.5, "18": 60, "run2": 138, "24": 1, "2024": 1}
   signal_string = {"RSGluon": "g_{KK}" , "ZPrime":"Z'", "ZPrime_DM": "Z_{DM}"}
   legend_string = {"" :"", "1" : "1% Width", "10":"10% Width" , "30":"30% Width", "DM":"" }
   if width != "" : tag = "_"+width
